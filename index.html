@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Felipe Lizama-Mora — Biotechnology" />
+  <meta name="description" content="Felipe Lizama-Mora — Biotecnología" />
   <title>Felipe Lizama-Mora</title>
   <style>
     :root {
@@ -83,43 +83,60 @@
 <body>
   <main>
     <h1>Felipe Lizama-Mora</h1>
-    <p class="subtitle">biotechnology</p>
-    <p class="clock">Temuco, CL — <span id="time" aria-live="polite">--:--:--</span></p>
+    <p class="subtitle">Biotecnología</p>
+    <p class="clock">Temuco, CL — <span id="time" aria-live="polite">Cargando hora...</span></p>
     <hr class="divider" />
     <nav aria-label="Navegación principal">
       <a href="#about">about</a>
       <a href="#projects">projects</a>
       <a href="#contact">contact</a>
-      <a href="https://github.com/pipelzm" rel="noopener noreferrer">github</a>
-      <a href="https://mlkfeed.framer.website" rel="noopener noreferrer">feedback</a>
+      <a href="https://github.com/pipelzm" rel="noopener noreferrer">GitHub</a>
+      <a href="https://mlkfeed.framer.website" rel="noopener noreferrer">Feedback</a>
     </nav>
     <footer>
-      <span id="year"></span> powered by GitHub
+      <span id="year"></span> · Felipe Lizama-Mora
     </footer>
   </main>
 
   <script>
-    const tz = "America/Santiago";
-    const timeEl = document.getElementById("time");
-    const yearEl = document.getElementById("year");
+    (function () {
+      const timeEl = document.getElementById("time");
+      const yearEl = document.getElementById("year");
+      if (!timeEl) return;
 
-    const timeFmt = new Intl.DateTimeFormat("es-CL", {
-      timeZone: tz,
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit"
-      hour12: false,
-    });
+      const tz = "America/Santiago"; // Temuco, Chile
+      const pad = (n) => String(n).padStart(2, "0");
 
-    function tick() {
-    const now = new Date();
-    timeEl.textContent = timeFmt.format(now);
-    }
-    
-    tick();
-    setInterval(tick, 1000);
+      function formatTime(date) {
+        const opts = {
+          timeZone: tz,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        };
+        try {
+          return date.toLocaleTimeString("es-CL", opts);
+        } catch (e) {
+          try {
+            return new Intl.DateTimeFormat("es-CL", opts).format(date);
+          } catch (e2) {
+            const h = pad(date.getHours());
+            const m = pad(date.getMinutes());
+            const s = pad(date.getSeconds());
+            return `${h}:${m}:${s}`;
+          }
+        }
+      }
 
-    yearEl.textContent = new Date().getFullYear();
+      function tick() {
+        timeEl.textContent = formatTime(new Date());
+      }
+
+      tick();
+      setInterval(tick, 1000);
+      yearEl.textContent = String(new Date().getFullYear());
+    })();
   </script>
 </body>
 </html>
