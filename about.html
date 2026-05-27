@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sobre Felipe Lizama-Mora" />
+  <title>About · Felipe Lizama-Mora</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --text: #111;
+      --muted: rgba(17, 17, 17, 0.72);
+      --line: rgba(17, 17, 17, 0.22);
+      --card: rgba(17, 17, 17, 0.04);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f2f2f2;
+        --muted: rgba(242, 242, 242, 0.72);
+        --line: rgba(242, 242, 242, 0.28);
+        --card: rgba(242, 242, 242, 0.06);
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: Canvas;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: clamp(48px, 8vw, 96px) 24px;
+    }
+    header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .back {
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .back:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .divider {
+      margin: 18px 0 30px;
+      border: none;
+      border-top: 1px solid var(--line);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 860px) {
+      .grid { grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 14px;
+      padding: 18px 18px;
+    }
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    p strong { color: var(--text); font-weight: 600; }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      letter-spacing: 0.01em;
+    }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.7; }
+    li { margin: 0 0 6px; }
+    .portrait {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: var(--card);
+    }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05) saturate(0.9); }
+    footer {
+      margin-top: 44px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>About</h1>
+      <a class="back" href="index.html">← inicio</a>
+    </header>
+    <hr class="divider" />
+
+    <div class="grid">
+      <section class="card">
+        <h2>Hola, soy Felipe.</h2>
+        <p>
+          Soy <strong>Felipe Lizama-Mora</strong>, biotecnólogo en Temuco, Chile. Me interesa construir herramientas
+          claras y útiles en la intersección entre <strong>ciencia</strong>, <strong>software</strong> y
+          <strong>diseño</strong>.
+        </p>
+        <p>
+          Últimamente estoy trabajando en proyectos relacionados con química computacional, visualización de datos y
+          aplicaciones de escritorio enfocadas en investigación.
+        </p>
+      </section>
+
+      <aside class="card">
+        <div class="portrait" aria-label="Retrato en puntillismo">
+          <img src="assets/portrait-halftone.png" alt="Retrato en puntillismo" loading="lazy" decoding="async" />
+        </div>
+      </aside>
+
+      <section class="card">
+        <h2>Intereses</h2>
+        <ul>
+          <li>Química / bioinformática aplicada</li>
+          <li>Herramientas reproducibles para investigación</li>
+          <li>Interfaces minimalistas (menos fricción, más foco)</li>
+          <li>Visualización: mapas, redes, y gráficos que expliquen</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Ahora</h2>
+        <ul>
+          <li>Desarrollando <strong>Moleku</strong> (desktop + workflows científicos)</li>
+          <li>Mejorando documentación, releases y distribución</li>
+          <li>Experimentando con estilos “editorial” y puntillismo</li>
+        </ul>
+      </section>
+    </div>
+
+    <footer>
+      <span id="year"></span> · Felipe Lizama-Mora · <a href="contact.html">contacto</a>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>
