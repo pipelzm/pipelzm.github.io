@@ -84,13 +84,13 @@
   <main>
     <h1>Felipe Lizama-Mora</h1>
     <p class="subtitle">biotechnology</p>
-    <p class="clock">Temuco, CL — <span id="time" aria-live="polite">--:--</span></p>
+    <p class="clock">Temuco, CL — <span id="time" aria-live="polite">--:--:--</span></p>
     <hr class="divider" />
     <nav aria-label="Navegación principal">
       <a href="#about">about</a>
       <a href="#projects">projects</a>
       <a href="#contact">contact</a>
-      <a href="https://github.com/pipelzm" rel="noopener noreferrer">gitHub</a>
+      <a href="https://github.com/pipelzm" rel="noopener noreferrer">github</a>
       <a href="https://mlkfeed.framer.website" rel="noopener noreferrer">feedback</a>
     </nav>
     <footer>
@@ -107,14 +107,17 @@
       timeZone: tz,
       hour: "2-digit",
       minute: "2-digit",
+      second: "2-digit"
       hour12: false,
     });
 
     function tick() {
-      timeEl.textContent = timeFmt.format(new Date());
+    const now = new Date();
+      timeEl.textContent = timeFmt.format(now);
     }
+    
     tick();
-    setInterval(tick, 30_000);
+    setInterval(tick, 1000);
 
     yearEl.textContent = new Date().getFullYear();
   </script>
