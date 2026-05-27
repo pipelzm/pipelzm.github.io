@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,6 +50,41 @@
       font-weight: 600;
       letter-spacing: -0.02em;
       line-height: 1.05;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+    @media (min-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr 220px;
+        align-items: center;
+      }
+    }
+    .portrait {
+      width: 200px;
+      max-width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--map-bg) 85%, transparent);
+      overflow: hidden;
+      justify-self: start;
+    }
+    @media (min-width: 860px) {
+      .portrait {
+        justify-self: end;
+      }
+    }
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.05) saturate(0.9);
     }
     .subtitle {
       margin: 0 0 22px;
@@ -177,13 +212,20 @@
 </head>
 <body>
   <main>
-    <h1>Felipe Lizama-Mora</h1>
-    <p class="subtitle">biotechnology</p>
-    <p class="clock">Lautaro, CL — <span id="time" aria-live="polite">loading...</span></p>
+    <header class="hero">
+      <div>
+        <h1>Felipe Lizama-Mora</h1>
+        <p class="subtitle">bi</p>
+        <p class="clock">Lautaro, CL — <span id="time" aria-live="polite">loading...</span></p>
+      </div>
+      <figure class="portrait" aria-label="Retrato en puntillismo">
+        <img src="assets/portrait-halftone.png" alt="Retrato en puntillismo" loading="lazy" decoding="async" />
+      </figure>
+    </header>
 
     <section id="world" class="world-section" aria-labelledby="world-title">
-      <h2 id="world-title" class="world-title">World</h2>
-      <p class="world-hint">hints -> light = daytime · dark = night </p>
+      <h2 id="world-title" class="world-title">WORLD</h2>
+      <p class="world-hint">hints -> light = daytime · dark = night</p>
       <div class="map-wrap">
         <canvas id="world-map" aria-hidden="true"></canvas>
         <div id="map-labels" class="map-labels"></div>
@@ -224,7 +266,6 @@
         { name: "Tokyo", tz: "Asia/Tokyo", lat: 35.6762, lng: 139.6503 },
         { name: "Sydney", tz: "Australia/Sydney", lat: -33.8688, lng: 151.2093 },
         { name: "Shanghai", tz: "Asia/Shanghai", lat: 39.9042, lng: 116.4074 },
-        { name: "Seoul", tz: "Asia/Seoul", lat: 37.5665, lng: 126.9780 },
       ];
 
       const timeOpts = { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false };
