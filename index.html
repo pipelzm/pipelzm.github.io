@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Felipe Lizama-Mora — Biotecnología" />
+  <meta name="description" content="Felipe Lizama-Mora — Biotechnology" />
   <title>Felipe Lizama-Mora</title>
   <style>
     :root {
@@ -11,12 +11,14 @@
       --text: #111;
       --muted: rgba(17, 17, 17, 0.72);
       --line: rgba(17, 17, 17, 0.22);
+      --globe-bg: #0b0d12;
     }
     @media (prefers-color-scheme: dark) {
       :root {
         --text: #f2f2f2;
         --muted: rgba(242, 242, 242, 0.72);
         --line: rgba(242, 242, 242, 0.28);
+        --globe-bg: #050608;
       }
     }
     * { box-sizing: border-box; }
@@ -56,6 +58,60 @@
       border: none;
       border-top: 1px solid var(--line);
     }
+    .world-section {
+      margin: 0 0 40px;
+    }
+    .world-title {
+      margin: 0 0 6px;
+      font-size: 1.125rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .world-hint {
+      margin: 0 0 16px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .globe-wrap {
+      width: 100%;
+      height: min(62vh, 480px);
+      min-height: 280px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--globe-bg);
+      border: 1px solid var(--line);
+    }
+    .globe-wrap canvas {
+      outline: none;
+    }
+    .world-clocks {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px 16px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .world-clocks li {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .world-clocks .city {
+      display: block;
+      color: var(--text);
+      font-size: 0.875rem;
+      margin-bottom: 2px;
+    }
+    .world-clocks .city-time {
+      font-size: 0.9375rem;
+      letter-spacing: 0.02em;
+    }
+    .world-clocks li.is-home .city::after {
+      content: " · tú";
+      opacity: 0.65;
+      font-weight: 400;
+    }
     nav {
       display: flex;
       flex-wrap: wrap;
@@ -78,13 +134,36 @@
       font-size: 0.875rem;
       color: var(--muted);
     }
+    .globe-marker {
+      color: #f2f2f2;
+      font-family: inherit;
+      font-size: 11px;
+      line-height: 1.25;
+      text-align: center;
+      pointer-events: none;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+      white-space: nowrap;
+    }
+    .globe-marker strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
   <main>
     <h1>Felipe Lizama-Mora</h1>
-    <p class="subtitle">Biotechnology</p>
-    <p class="clock">Temuco, CL — <span id="time" aria-live="polite">Cargando hora...</span></p>
+    <p class="subtitle">biotechnology</p>
+    <p class="clock">Temuco, CL — <span id="time" aria-live="polite">loading...</span></p>
+
+    <section id="world" class="world-section" aria-labelledby="world-title">
+      <h2 id="world-title" class="world-title">World</h2>
+      <p class="world-hint">drag to rotate · zoom +/- (mouse wheel)</p>
+      <div id="globe" class="globe-wrap" role="img" aria-label="World"></div>
+      <ul id="world-clocks" class="world-clocks" aria-live="polite"></ul>
+    </section>
+
     <hr class="divider" />
     <nav aria-label="Navegación principal">
       <a href="#about">about</a>
@@ -98,44 +177,119 @@
     </footer>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/globe.gl/dist/globe.gl.min.js"></script>
   <script>
     (function () {
-      const timeEl = document.getElementById("time");
-      const yearEl = document.getElementById("year");
-      if (!timeEl) return;
+      const HOME_TZ = "America/Santiago";
 
-      const tz = "America/Santiago"; // Temuco, Chile
-      const pad = (n) => String(n).padStart(2, "0");
+      const CITIES = [
+        { name: "Temuco", tz: "America/Santiago", lat: -38.7359, lng: -72.5904, home: true },
+        { name: "Santiago", tz: "America/Santiago", lat: -33.4489, lng: -70.6693 },
+        { name: "New York", tz: "America/New_York", lat: 40.7128, lng: -74.006 },
+        { name: "Los Angeles", tz: "America/Los_Angeles", lat: 34.0522, lng: -118.2437 },
+        { name: "London", tz: "Europe/London", lat: 51.5074, lng: -0.1278 },
+        { name: "Paris", tz: "Europe/Paris", lat: 48.8566, lng: 2.3522 },
+        { name: "Dubai", tz: "Asia/Dubai", lat: 25.2048, lng: 55.2708 },
+        { name: "Tokyo", tz: "Asia/Tokyo", lat: 35.6762, lng: 139.6503 },
+        { name: "Sidney", tz: "Australia/Sydney", lat: -33.8688, lng: 151.2093 },
+      ];
 
-      function formatTime(date) {
-        const opts = {
-          timeZone: tz,
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-        };
+      const timeOpts = {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      };
+
+      function formatInZone(date, tz) {
         try {
-          return date.toLocaleTimeString("es-CL", opts);
+          return date.toLocaleTimeString("es-CL", { ...timeOpts, timeZone: tz });
         } catch (e) {
-          try {
-            return new Intl.DateTimeFormat("es-CL", opts).format(date);
-          } catch (e2) {
-            const h = pad(date.getHours());
-            const m = pad(date.getMinutes());
-            const s = pad(date.getSeconds());
-            return `${h}:${m}:${s}`;
-          }
+          return "--:--:--";
         }
       }
 
-      function tick() {
-        timeEl.textContent = formatTime(new Date());
+      const timeEl = document.getElementById("time");
+      const yearEl = document.getElementById("year");
+      const clocksEl = document.getElementById("world-clocks");
+
+      function tickLocal() {
+        if (timeEl) timeEl.textContent = formatInZone(new Date(), HOME_TZ);
       }
 
-      tick();
-      setInterval(tick, 1000);
-      yearEl.textContent = String(new Date().getFullYear());
+      function buildClockList() {
+        if (!clocksEl) return;
+        clocksEl.innerHTML = CITIES.map(
+          (c) =>
+            `<li${c.home ? ' class="is-home"' : ""} data-tz="${c.tz}">
+              <span class="city">${c.name}</span>
+              <span class="city-time">--:--:--</span>
+            </li>`
+        ).join("");
+      }
+
+      function tickWorldList() {
+        if (!clocksEl) return;
+        const now = new Date();
+        clocksEl.querySelectorAll("li").forEach((li) => {
+          const tz = li.getAttribute("data-tz");
+          const t = li.querySelector(".city-time");
+          if (t && tz) t.textContent = formatInZone(now, tz);
+        });
+      }
+
+      function tickAll() {
+        tickLocal();
+        tickWorldList();
+      }
+
+      buildClockList();
+      tickAll();
+      setInterval(tickAll, 1000);
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+      const globeEl = document.getElementById("globe");
+      if (!globeEl || typeof Globe !== "function") return;
+
+      const markerEls = new Map();
+
+      const globe = Globe(globeEl)
+        .globeImageUrl("https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg")
+        .backgroundColor("rgba(0,0,0,0)")
+        .htmlElementsData(CITIES)
+        .htmlElement((d) => {
+          const el = document.createElement("div");
+          el.className = "globe-marker";
+          el.innerHTML = `<strong>${d.name}</strong><span class="marker-time">--:--</span>`;
+          markerEls.set(d.name, el);
+          return el;
+        })
+        .htmlLat("lat")
+        .htmlLng("lng")
+        .htmlAltitude(0.02)
+        .pointOfView({ lat: -20, lng: -60, altitude: 2.2 });
+
+      globe.controls().enableZoom = true;
+      globe.controls().autoRotate = true;
+      globe.controls().autoRotateSpeed = 0.35;
+
+      function tickMarkers() {
+        const now = new Date();
+        CITIES.forEach((c) => {
+          const el = markerEls.get(c.name);
+          if (!el) return;
+          const t = el.querySelector(".marker-time");
+          if (t) t.textContent = formatInZone(now, c.tz).slice(0, 5);
+        });
+      }
+
+      tickMarkers();
+      setInterval(tickMarkers, 1000);
+
+      window.addEventListener("resize", () => {
+        globe.width(globeEl.clientWidth);
+        globe.height(globeEl.clientHeight);
+      });
     })();
   </script>
 </body>
