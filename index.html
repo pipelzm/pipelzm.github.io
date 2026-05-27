@@ -1,41 +1,122 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Your Name</title>
+  <meta name="description" content="Felipe Lizama-Mora — Biotecnología" />
+  <title>Felipe Lizama-Mora</title>
   <style>
-    :root { color-scheme: light dark; }
-    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
-    main { max-width: 900px; margin: 72px auto; padding: 0 24px; }
-    h1 { margin: 0 0 18px; font-size: clamp(44px, 6vw, 72px); letter-spacing: 0.5px; }
-    nav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 16px; }
-    a { color: inherit; text-decoration: none; opacity: 0.85; }
-    a:hover { text-decoration: underline; opacity: 1; }
-    .divider { margin: 26px 0; opacity: 0.25; }
-    .small { font-size: 14px; opacity: 0.8; }
+    :root {
+      color-scheme: light dark;
+      --text: #111;
+      --muted: rgba(17, 17, 17, 0.72);
+      --line: rgba(17, 17, 17, 0.22);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #f2f2f2;
+        --muted: rgba(242, 242, 242, 0.72);
+        --line: rgba(242, 242, 242, 0.28);
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: Canvas;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: clamp(48px, 8vw, 96px) 24px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2.75rem, 7vw, 4.25rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .subtitle {
+      margin: 0 0 22px;
+      font-size: clamp(1rem, 2.2vw, 1.125rem);
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+    .clock {
+      margin: 0 0 28px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .divider {
+      margin: 0 0 32px;
+      border: none;
+      border-top: 1px solid var(--line);
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.25rem;
+      font-size: 1rem;
+    }
+    nav a {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.82;
+      transition: opacity 0.15s ease;
+    }
+    nav a:hover {
+      opacity: 1;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    footer {
+      margin-top: 48px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
   </style>
 </head>
 <body>
   <main>
-    <h1>YOUR NAME</h1>
-    <div class="small">TIME IN YOUR CITY — <span id="time">--:--</span></div>
-    <div class="divider">____</div>
-    <nav>
-      <a href="/about">about</a>
-      <a href="/faq">faq</a>
-      <a href="/blog">blog</a>
-      <a href="/resume">resume</a>
-      <a href="/contact">contact</a>
+    <h1>Felipe Lizama-Mora</h1>
+    <p class="subtitle">Biotecnología</p>
+    <p class="clock">Temuco, CL — <span id="time" aria-live="polite">--:--</span></p>
+    <hr class="divider" />
+    <nav aria-label="Navegación principal">
+      <a href="#about">about</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+      <a href="https://github.com/pipelzm" rel="noopener noreferrer">GitHub</a>
+      <a href="https://mlkfeed.framer.website" rel="noopener noreferrer">Feedback</a>
     </nav>
+    <footer>
+      <span id="year"></span> · Felipe Lizama-Mora
+    </footer>
   </main>
 
   <script>
-    const tz = "America/Santiago"; // change to your timezone
-    const fmt = new Intl.DateTimeFormat([], { timeZone: tz, hour: '2-digit', minute: '2-digit' });
-    const el = document.getElementById('time');
-    const tick = () => el.textContent = fmt.format(new Date());
-    tick(); setInterval(tick, 1000 * 30);
+    const tz = "America/Santiago";
+    const timeEl = document.getElementById("time");
+    const yearEl = document.getElementById("year");
+
+    const timeFmt = new Intl.DateTimeFormat("es-CL", {
+      timeZone: tz,
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+
+    function tick() {
+      timeEl.textContent = timeFmt.format(new Date());
+    }
+    tick();
+    setInterval(tick, 30_000);
+
+    yearEl.textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
