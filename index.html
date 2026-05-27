@@ -11,14 +11,24 @@
       --text: #111;
       --muted: rgba(17, 17, 17, 0.72);
       --line: rgba(17, 17, 17, 0.22);
-      --globe-bg: #0b0d12;
+      --map-bg: #e8e6e1;
+      --dot-day: rgba(28, 26, 24, 0.92);
+      --dot-night: rgba(28, 26, 24, 0.28);
+      --dot-twilight: rgba(28, 26, 24, 0.55);
+      --city-dot: #1a1816;
+      --city-glow: rgba(28, 26, 24, 0.35);
     }
     @media (prefers-color-scheme: dark) {
       :root {
         --text: #f2f2f2;
         --muted: rgba(242, 242, 242, 0.72);
         --line: rgba(242, 242, 242, 0.28);
-        --globe-bg: #050608;
+        --map-bg: #0a0b0e;
+        --dot-day: rgba(235, 232, 225, 0.9);
+        --dot-night: rgba(235, 232, 225, 0.14);
+        --dot-twilight: rgba(235, 232, 225, 0.42);
+        --city-dot: #f0ede6;
+        --city-glow: rgba(240, 237, 230, 0.45);
       }
     }
     * { box-sizing: border-box; }
@@ -58,37 +68,71 @@
       border: none;
       border-top: 1px solid var(--line);
     }
-    .world-section {
-      margin: 0 0 40px;
-    }
+    .world-section { margin: 0 0 40px; }
     .world-title {
       margin: 0 0 6px;
       font-size: 1.125rem;
       font-weight: 600;
-      letter-spacing: 0.01em;
     }
     .world-hint {
-      margin: 0 0 16px;
+      margin: 0 0 14px;
       font-size: 0.875rem;
       color: var(--muted);
     }
-    .globe-wrap {
+    .map-wrap {
+      position: relative;
       width: 100%;
-      height: min(62vh, 480px);
-      min-height: 280px;
+      aspect-ratio: 2 / 1.05;
+      max-height: 440px;
       border-radius: 12px;
       overflow: hidden;
-      background: var(--globe-bg);
+      background: var(--map-bg);
       border: 1px solid var(--line);
     }
-    .globe-wrap canvas {
-      outline: none;
+    #world-map {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .map-labels {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .map-label {
+      position: absolute;
+      transform: translate(-50%, -100%);
+      font-size: 10px;
+      line-height: 1.2;
+      text-align: center;
+      color: var(--text);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .map-label strong {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .map-label .lbl-time {
+      font-size: 9px;
+      color: var(--muted);
+    }
+    .map-label.is-home strong::after {
+      content: " ·";
+      opacity: 0.5;
+    }
+    .map-status {
+      margin: 8px 0 0;
+      font-size: 0.75rem;
+      color: var(--muted);
+      min-height: 1em;
     }
     .world-clocks {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 10px 16px;
-      margin: 20px 0 0;
+      margin: 18px 0 0;
       padding: 0;
       list-style: none;
     }
@@ -103,14 +147,10 @@
       font-size: 0.875rem;
       margin-bottom: 2px;
     }
-    .world-clocks .city-time {
-      font-size: 0.9375rem;
-      letter-spacing: 0.02em;
-    }
+    .world-clocks .city-time { font-size: 0.9375rem; }
     .world-clocks li.is-home .city::after {
       content: " · tú";
       opacity: 0.65;
-      font-weight: 400;
     }
     nav {
       display: flex;
@@ -122,7 +162,6 @@
       color: inherit;
       text-decoration: none;
       opacity: 0.82;
-      transition: opacity 0.15s ease;
     }
     nav a:hover {
       opacity: 1;
@@ -134,33 +173,22 @@
       font-size: 0.875rem;
       color: var(--muted);
     }
-    .globe-marker {
-      color: #f2f2f2;
-      font-family: inherit;
-      font-size: 11px;
-      line-height: 1.25;
-      text-align: center;
-      pointer-events: none;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
-      white-space: nowrap;
-    }
-    .globe-marker strong {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-    }
   </style>
 </head>
 <body>
   <main>
     <h1>Felipe Lizama-Mora</h1>
     <p class="subtitle">biotechnology</p>
-    <p class="clock">Temuco, CL — <span id="time" aria-live="polite">loading...</span></p>
+    <p class="clock">Lautaro, CL — <span id="time" aria-live="polite">loading...</span></p>
 
     <section id="world" class="world-section" aria-labelledby="world-title">
-      <h2 id="world-title" class="world-title">World</h2>
-      <p class="world-hint">drag to rotate · zoom +/- (mouse wheel)</p>
-      <div id="globe" class="globe-wrap" role="img" aria-label="World"></div>
+      <h2 id="world-title" class="world-title">Hora en el mundo</h2>
+      <p class="world-hint">World · light = daytime · dark = night</p>
+      <div class="map-wrap">
+        <canvas id="world-map" aria-hidden="true"></canvas>
+        <div id="map-labels" class="map-labels"></div>
+      </div>
+      <p id="map-status" class="map-status" aria-live="polite"></p>
       <ul id="world-clocks" class="world-clocks" aria-live="polite"></ul>
     </section>
 
@@ -173,14 +201,17 @@
       <a href="https://mlkfeed.framer.website" rel="noopener noreferrer">feedback</a>
     </nav>
     <footer>
-      <span id="year"></span> · powered by RAVEN | プログラム
+      <span id="year"></span> · Felipe Lizama-Mora
     </footer>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/globe.gl/dist/globe.gl.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <script>
     (function () {
       const HOME_TZ = "America/Santiago";
+      const WORLD_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+      const STIPPLE_TARGET = 9000;
 
       const CITIES = [
         { name: "Temuco", tz: "America/Santiago", lat: -38.7359, lng: -72.5904, home: true },
@@ -194,12 +225,7 @@
         { name: "Sidney", tz: "Australia/Sydney", lat: -33.8688, lng: 151.2093 },
       ];
 
-      const timeOpts = {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-      };
+      const timeOpts = { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false };
 
       function formatInZone(date, tz) {
         try {
@@ -209,9 +235,42 @@
         }
       }
 
+      function solarDeclination(date) {
+        const start = Date.UTC(date.getUTCFullYear(), 0, 0);
+        const day = (date - start) / 86400000;
+        return (23.44 * Math.PI) / 180 * Math.sin(((2 * Math.PI) / 365) * (day - 81));
+      }
+
+      function sunZenithCos(lng, lat, date) {
+        const dec = solarDeclination(date);
+        const utcH = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
+        const ha = ((lng - (utcH - 12) * 15) * Math.PI) / 180;
+        const latR = (lat * Math.PI) / 180;
+        return Math.sin(latR) * Math.sin(dec) + Math.cos(latR) * Math.cos(dec) * Math.cos(ha);
+      }
+
+      function dayPhase(lng, lat, date) {
+        const z = sunZenithCos(lng, lat, date);
+        if (z > 0.15) return "day";
+        if (z > -0.12) return "twilight";
+        return "night";
+      }
+
       const timeEl = document.getElementById("time");
       const yearEl = document.getElementById("year");
       const clocksEl = document.getElementById("world-clocks");
+      const canvas = document.getElementById("world-map");
+      const labelsEl = document.getElementById("map-labels");
+      const statusEl = document.getElementById("map-status");
+      const wrap = canvas && canvas.parentElement;
+
+      let countries = null;
+      let stipple = [];
+      let projection = null;
+      let width = 0;
+      let height = 0;
+      let dpr = 1;
+      const labelNodes = [];
 
       function tickLocal() {
         if (timeEl) timeEl.textContent = formatInZone(new Date(), HOME_TZ);
@@ -241,55 +300,152 @@
       function tickAll() {
         tickLocal();
         tickWorldList();
+        drawMap();
+        updateLabels();
       }
 
-      buildClockList();
-      tickAll();
-      setInterval(tickAll, 1000);
-      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+      function readCss(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      }
 
-      const globeEl = document.getElementById("globe");
-      if (!globeEl || typeof Globe !== "function") return;
+      function dotColor(phase) {
+        if (phase === "day") return readCss("--dot-day");
+        if (phase === "twilight") return readCss("--dot-twilight");
+        return readCss("--dot-night");
+      }
 
-      const markerEls = new Map();
+      function buildStipple(land, proj, w, h) {
+        const pts = [];
+        const contains = (p) => land.features.some((f) => d3.geoContains(f, p));
+        let tries = 0;
+        const maxTries = STIPPLE_TARGET * 14;
+        while (pts.length < STIPPLE_TARGET && tries < maxTries) {
+          tries += 1;
+          const x = 8 + Math.random() * (w - 16);
+          const y = 8 + Math.random() * (h - 16);
+          const p = proj.invert([x, y]);
+          if (!p || !contains(p)) continue;
+          pts.push({
+            lng: p[0],
+            lat: p[1],
+            r: 0.55 + Math.random() * 0.95,
+            jitter: Math.random(),
+          });
+        }
+        return pts;
+      }
 
-      const globe = Globe(globeEl)
-        .globeImageUrl("https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg")
-        .backgroundColor("rgba(0,0,0,0)")
-        .htmlElementsData(CITIES)
-        .htmlElement((d) => {
-          const el = document.createElement("div");
-          el.className = "globe-marker";
-          el.innerHTML = `<strong>${d.name}</strong><span class="marker-time">--:--</span>`;
-          markerEls.set(d.name, el);
-          return el;
-        })
-        .htmlLat("lat")
-        .htmlLng("lng")
-        .htmlAltitude(0.02)
-        .pointOfView({ lat: -20, lng: -60, altitude: 2.2 });
-
-      globe.controls().enableZoom = true;
-      globe.controls().autoRotate = true;
-      globe.controls().autoRotateSpeed = 0.35;
-
-      function tickMarkers() {
-        const now = new Date();
+      function setupLabels() {
+        if (!labelsEl) return;
+        labelsEl.innerHTML = "";
+        labelNodes.length = 0;
         CITIES.forEach((c) => {
-          const el = markerEls.get(c.name);
-          if (!el) return;
-          const t = el.querySelector(".marker-time");
-          if (t) t.textContent = formatInZone(now, c.tz).slice(0, 5);
+          const el = document.createElement("div");
+          el.className = "map-label" + (c.home ? " is-home" : "");
+          el.innerHTML = `<strong>${c.name}</strong><span class="lbl-time">--:--</span>`;
+          labelsEl.appendChild(el);
+          labelNodes.push({ city: c, el });
         });
       }
 
-      tickMarkers();
-      setInterval(tickMarkers, 1000);
+      function updateLabels() {
+        if (!projection) return;
+        const now = new Date();
+        labelNodes.forEach(({ city, el }) => {
+          const xy = projection([city.lng, city.lat]);
+          if (!xy) return;
+          el.style.left = xy[0] + "px";
+          el.style.top = Math.max(8, xy[1] - 6) + "px";
+          const t = el.querySelector(".lbl-time");
+          if (t) t.textContent = formatInZone(now, city.tz).slice(0, 5);
+        });
+      }
 
-      window.addEventListener("resize", () => {
-        globe.width(globeEl.clientWidth);
-        globe.height(globeEl.clientHeight);
-      });
+      function drawMap() {
+        if (!canvas || !projection || !stipple.length) return;
+        const ctx = canvas.getContext("2d");
+        const now = new Date();
+        const cityColor = readCss("--city-dot");
+        const cityGlow = readCss("--city-glow");
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < stipple.length; i += 1) {
+          const p = stipple[i];
+          const xy = projection([p.lng, p.lat]);
+          if (!xy) continue;
+          const phase = dayPhase(p.lng, p.lat, now);
+          ctx.fillStyle = dotColor(phase);
+          ctx.globalAlpha = 0.55 + p.jitter * 0.45;
+          ctx.beginPath();
+          ctx.arc(xy[0], xy[1], p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.globalAlpha = 1;
+        CITIES.forEach((city) => {
+          const xy = projection([city.lng, city.lat]);
+          if (!xy) return;
+          ctx.fillStyle = cityGlow;
+          ctx.beginPath();
+          ctx.arc(xy[0], xy[1], 7, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = cityColor;
+          ctx.beginPath();
+          ctx.arc(xy[0], xy[1], 2.8, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+
+      function resize() {
+        if (!wrap || !canvas) return;
+        width = Math.floor(wrap.clientWidth);
+        height = Math.floor(wrap.clientHeight);
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + "px";
+        canvas.style.height = height + "px";
+        if (countries) {
+          projection = d3.geoNaturalEarth1().fitExtent(
+            [[12, 10], [width - 12, height - 10]],
+            countries
+          );
+          stipple = buildStipple(countries, projection, width, height);
+        }
+        drawMap();
+        updateLabels();
+      }
+
+      async function initMap() {
+        if (!canvas || typeof d3 === "undefined" || typeof topojson === "undefined") {
+          if (statusEl) statusEl.textContent = "Mapa no disponible (revisa la conexión).";
+          return;
+        }
+        if (statusEl) statusEl.textContent = "Generando mapa en puntos…";
+        try {
+          const world = await fetch(WORLD_URL).then((r) => {
+            if (!r.ok) throw new Error("fetch");
+            return r.json();
+          });
+          countries = topojson.feature(world, world.objects.countries);
+          setupLabels();
+          resize();
+          if (statusEl) statusEl.textContent = "";
+        } catch (e) {
+          if (statusEl) statusEl.textContent = "No se pudo cargar el mapa. Los relojes abajo siguen activos.";
+        }
+      }
+
+      buildClockList();
+      tickLocal();
+      tickWorldList();
+      setInterval(tickAll, 1000);
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+      window.addEventListener("resize", resize);
+      initMap();
     })();
   </script>
 </body>
