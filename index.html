@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+    main { max-width: 900px; margin: 72px auto; padding: 0 24px; }
+    h1 { margin: 0 0 18px; font-size: clamp(44px, 6vw, 72px); letter-spacing: 0.5px; }
+    nav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 16px; }
+    a { color: inherit; text-decoration: none; opacity: 0.85; }
+    a:hover { text-decoration: underline; opacity: 1; }
+    .divider { margin: 26px 0; opacity: 0.25; }
+    .small { font-size: 14px; opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>YOUR NAME</h1>
+    <div class="small">TIME IN YOUR CITY — <span id="time">--:--</span></div>
+    <div class="divider">____</div>
+    <nav>
+      <a href="/about">about</a>
+      <a href="/faq">faq</a>
+      <a href="/blog">blog</a>
+      <a href="/resume">resume</a>
+      <a href="/contact">contact</a>
+    </nav>
+  </main>
+
+  <script>
+    const tz = "America/Santiago"; // change to your timezone
+    const fmt = new Intl.DateTimeFormat([], { timeZone: tz, hour: '2-digit', minute: '2-digit' });
+    const el = document.getElementById('time');
+    const tick = () => el.textContent = fmt.format(new Date());
+    tick(); setInterval(tick, 1000 * 30);
+  </script>
+</body>
+</html>
