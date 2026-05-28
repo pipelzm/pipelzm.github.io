@@ -218,8 +218,8 @@
         <p class="subtitle">biotechnology</p>
         <p class="clock">Lautaro, CL — <span id="time" aria-live="polite">loading...</span></p>
       </div>
-      <figure class="portrait" aria-label="Retrato en puntillismo">
-        <img src="assets/portrait-halftone.png" alt="Retrato en puntillismo" loading="lazy" decoding="async" />
+      <figure class="portrait" aria-label="icon">
+        <img src="assets/portrait-halftone.png" alt="icon_" loading="lazy" decoding="async" />
       </figure>
     </header>
 
@@ -240,7 +240,8 @@
       <a href="projects.html">projects</a>
       <a href="contact.html">contact</a>
       <a href="https://github.com/pipelzm" rel="noopener noreferrer">github</a>
-      <a href="https://www.linkedin.com/in/felipe-lizama-mora-6b8685256" rel="noopener noreferrer">linkedin</a>
+      <a href="https://www.linkedin.com/in/felipe-lizama-mora-6b8685256/" rel="noopener noreferrer">linkedin</a>
+      <a href="https://orcid.org/0009-0001-2583-9748" rel="noopener noreferrer">orcid</a>
       
     </nav>
     <footer>
@@ -264,7 +265,7 @@
         { name: "Los Angeles", tz: "America/Los_Angeles", lat: 34.0522, lng: -118.2437 },
         { name: "Paris", tz: "Europe/Paris", lat: 48.8566, lng: 2.3522 },
         { name: "Dubai", tz: "Asia/Dubai", lat: 25.2048, lng: 55.2708 },
-        { name: "Tokio", tz: "Asia/Tokyo", lat: 35.6762, lng: 139.6503 },
+        { name: "Tokyo", tz: "Asia/Tokyo", lat: 35.6762, lng: 139.6503 },
         { name: "Sydney", tz: "Australia/Sydney", lat: -33.8688, lng: 151.2093 },
         { name: "Shanghai", tz: "Asia/Shanghai", lat: 39.9042, lng: 116.4074 },
         { name: "Seoul", tz: "Asia/Seoul", lat: 37.5665, lng: 126.9780 },
@@ -513,10 +514,10 @@
 
       async function initMap() {
         if (!canvas || typeof d3 === "undefined" || typeof topojson === "undefined") {
-          if (statusEl) statusEl.textContent = "404 (check your connection).";
+          if (statusEl) statusEl.textContent = "map not available (check your connection).";
           return;
         }
-        if (statusEl) statusEl.textContent = "loading…";
+        if (statusEl) statusEl.textContent = "loading map…";
         try {
           const world = await fetch(WORLD_URL).then((r) => {
             if (!r.ok) throw new Error("fetch");
@@ -524,11 +525,11 @@
           });
           countries = topojson.feature(world, world.objects.countries);
           setupLabels();
-          if (statusEl) statusEl.textContent = "loading map…";
+          if (statusEl) statusEl.textContent = "point by point…";
           resize();
           if (statusEl) statusEl.textContent = "";
         } catch (e) {
-          if (statusEl) statusEl.textContent = "map is not working. all the clocks are ok!.";
+          if (statusEl) statusEl.textContent = "map is not workin'. clocks are ok!.";
         }
       }
 
