@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Felipe Lizama-Mora — Biotecnología" />
+  <meta name="description" content="Felipe Lizama-Mora — Biotechnology" />
   <title>Felipe Lizama-Mora</title>
   <style>
     :root {
@@ -215,8 +215,8 @@
     <header class="hero">
       <div>
         <h1>Felipe Lizama-Mora</h1>
-        <p class="subtitle">Biotecnología</p>
-        <p class="clock">Temuco, CL — <span id="time" aria-live="polite">Cargando hora...</span></p>
+        <p class="subtitle">biotechnology</p>
+        <p class="clock">Lautaro, CL — <span id="time" aria-live="polite">loading...</span></p>
       </div>
       <figure class="portrait" aria-label="Retrato en puntillismo">
         <img src="assets/portrait-halftone.png" alt="Retrato en puntillismo" loading="lazy" decoding="async" />
@@ -224,8 +224,8 @@
     </header>
 
     <section id="world" class="world-section" aria-labelledby="world-title">
-      <h2 id="world-title" class="world-title">Hora en el mundo</h2>
-      <p class="world-hint">Mapa en puntillismo · más claro = de día · más tenue = de noche</p>
+      <h2 id="world-title" class="world-title">WORLD</h2>
+      <p class="world-hint">hints -> light = daytime · dark = night time</p>
       <div class="map-wrap">
         <canvas id="world-map" aria-hidden="true"></canvas>
         <div id="map-labels" class="map-labels"></div>
@@ -239,11 +239,12 @@
       <a href="about.html">about</a>
       <a href="projects.html">projects</a>
       <a href="contact.html">contact</a>
-      <a href="https://github.com/pipelzm" rel="noopener noreferrer">GitHub</a>
-      <a href="https://mlkfeed.framer.website" rel="noopener noreferrer">Feedback</a>
+      <a href="https://github.com/pipelzm" rel="noopener noreferrer">github</a>
+      <a href="https://www.linkedin.com/in/felipe-lizama-mora-6b8685256" rel="noopener noreferrer">linkedin</a>
+      
     </nav>
     <footer>
-      <span id="year"></span> · Felipe Lizama-Mora
+      <span id="year"></span> · powered by RAVEN | テクノロジー
     </footer>
   </main>
 
@@ -259,13 +260,14 @@
       const CITIES = [
         { name: "Temuco", tz: "America/Santiago", lat: -38.7359, lng: -72.5904, home: true },
         { name: "Santiago", tz: "America/Santiago", lat: -33.4489, lng: -70.6693 },
-        { name: "Nueva York", tz: "America/New_York", lat: 40.7128, lng: -74.006 },
-        { name: "Los Ángeles", tz: "America/Los_Angeles", lat: 34.0522, lng: -118.2437 },
-        { name: "Londres", tz: "Europe/London", lat: 51.5074, lng: -0.1278 },
-        { name: "París", tz: "Europe/Paris", lat: 48.8566, lng: 2.3522 },
-        { name: "Dubái", tz: "Asia/Dubai", lat: 25.2048, lng: 55.2708 },
+        { name: "New York", tz: "America/New_York", lat: 40.7128, lng: -74.006 },
+        { name: "Los Angeles", tz: "America/Los_Angeles", lat: 34.0522, lng: -118.2437 },
+        { name: "Paris", tz: "Europe/Paris", lat: 48.8566, lng: 2.3522 },
+        { name: "Dubai", tz: "Asia/Dubai", lat: 25.2048, lng: 55.2708 },
         { name: "Tokio", tz: "Asia/Tokyo", lat: 35.6762, lng: 139.6503 },
-        { name: "Sídney", tz: "Australia/Sydney", lat: -33.8688, lng: 151.2093 },
+        { name: "Sydney", tz: "Australia/Sydney", lat: -33.8688, lng: 151.2093 },
+        { name: "Shanghai", tz: "Asia/Shanghai", lat: 39.9042, lng: 116.4074 },
+        { name: "Seoul", tz: "Asia/Seoul", lat: 37.5665, lng: 126.9780 },
       ];
 
       const timeOpts = { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false };
@@ -511,10 +513,10 @@
 
       async function initMap() {
         if (!canvas || typeof d3 === "undefined" || typeof topojson === "undefined") {
-          if (statusEl) statusEl.textContent = "Mapa no disponible (revisa la conexión).";
+          if (statusEl) statusEl.textContent = "404 (check your connection).";
           return;
         }
-        if (statusEl) statusEl.textContent = "Preparando mapa…";
+        if (statusEl) statusEl.textContent = "loading…";
         try {
           const world = await fetch(WORLD_URL).then((r) => {
             if (!r.ok) throw new Error("fetch");
@@ -522,11 +524,11 @@
           });
           countries = topojson.feature(world, world.objects.countries);
           setupLabels();
-          if (statusEl) statusEl.textContent = "Generando puntillismo…";
+          if (statusEl) statusEl.textContent = "loading map…";
           resize();
           if (statusEl) statusEl.textContent = "";
         } catch (e) {
-          if (statusEl) statusEl.textContent = "No se pudo cargar el mapa. Los relojes abajo siguen activos.";
+          if (statusEl) statusEl.textContent = "map is not working. all the clocks are ok!.";
         }
       }
 
