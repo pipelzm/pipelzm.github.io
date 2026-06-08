@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#d9d9d4" />
-  <title>pipelzm</title>
-  <meta name="description" content="Página personal de Felipe Lizama-Mora - biotecnología, bioinformática y proyectos." />
+  <title>pipelzm // bt</title>
+  <meta name="description" content="Página personal de Felipe Lizama." />
   <style>
     :root{
       --bg:#d9d9d4;
@@ -15,7 +15,7 @@
       --gray:#ededeb;
       --mid:#b9b9b4;
       --line:2px solid var(--ink);
-      --mono:"MS Gothic","Yu Gothic Mono","Osaka","Chicago","Courier New",monospace;
+      --mono:"MS Gothic","Yu Gothic Mono","Osaka","Chicago","Pixel Operator", "Arial" ,monospace;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -221,8 +221,8 @@
 <body>
   <main class="site" id="home">
     <header class="topbar">
-      <div class="icons" aria-hidden="true">✉️ 💬 📄 ☎️ 🛜 RSS</div>
-      <div class="time">Time : <span id="clock">4:44 AM</span> · <a href="#feedback">Login</a> | <a href="#feedback">Exit</a></div>
+      <div class="icons" aria-hidden="true">✉ ● ◼ ☎ RSS</div>
+      <div class="time">Time : <span id="clock">44:44 AM</span> · <a href="#feedback">Login</a> | <a href="#feedback">Exit</a></div>
     </header>
 
     <nav class="nav" aria-label="Navegación principal">
@@ -240,22 +240,22 @@
     <section class="layout">
       <aside class="sidebar">
         <section class="box">
-          <div class="panel-title">✿ プロフィール ✿</div>
+          <div class="panel-title">プロフィール</div>
           <div class="profile-img"><img src="main/assets/icon.png" alt="icon" /></div>
           <div class="profile-name">
             <h1>Felipe Lizama-Mora</h1>
-            <div class="muted">biotechnology/research</div>
+            <div class="muted">biotechnology</div>
             <div class="place">● Lautaro, CL</div>
           </div>
         </section>
 
         <section class="box sidebox">
-          <div class="panel-title">Interests</div>
+          <div class="panel-title">interest</div>
           <div class="interests">
             <ul>
               <li>bioinformatics</li>
               <li>biotechnology</li>
-              <li>ia</li>
+              <li>IA</li>
               <li>data science</li>
             </ul>
             <div class="tiny-icons" aria-hidden="true"><span>♙</span><span>▣</span><span>▥</span><span>♧</span></div>
@@ -265,36 +265,43 @@
 
       <section class="content">
         <article class="box article" id="about">
-          <div class="panel-title"><span>ようこそ！</span><span>posted：06:06 AM</span></div>
+          <div class="panel-title"><span>ようこそ！</span><span>投稿日：06:06 AM</span></div>
           <div class="body">
-            <p>hi！ i'm Felipe Lizama-Mora。</p>
-            <p>i am a researcher working at the intersection of biotechnology and data science. I enjoy writing code, analyzing data, and learning new technologies.</p>
-            <p>this site is a little space where I share my projects, notes, and interests.</p>
-            <p>thank you for your support! toward research, technology, and the future</p>
+            <p>こんにちは！ Felipe Lizama-Mora です。</p>
+            <p>バイオテクノロジーとデータサイエンスの交差点にいる研究者です。コードを書いたり、データを解析したり、新しい技術を学んだりするのが好きです。</p>
+            <p>このサイトは、私のプロジェクト、メモ、そして興味を共有するための小さな場所です。</p>
+            <p>よろしくお願いします！ 研究・技術・未来に向けて ✤</p>
           </div>
         </article>
 
         <article class="box article project" id="projects">
-          <div class="panel-title"><span>project - プロジェクト</span><span class="social">✉️ 💬 in iD</span></div>
+          <div class="panel-title"><span>プロジェクト・連絡</span><span class="social">✉ ● in iD</span></div>
           <div class="body">
             <p>現在取り組んでいること：</p>
             <ul class="arrow-list">
-              <li>Development of a Genomic Data Analysis Pipeline - RAVEN</li>
-              <li>Development and Automation of Bioinformatics Tools - Moleku</li>
-              <li>Promoting Open Science & Reproducible Research!</li></li>
-              <li>molecular docking / bionfo / md (molecular dynamics) / cheminformatics</li>
+              <li>ゲノムデータ解析パイプラインの開発</li>
+              <li>バイオインフォマティクスツールの作成と自動化</li>
+              <li>オープンサイエンス &amp; 再現可能な研究の推進</li>
+              <li>molecular docking / MD / cheminformatics</li>
             </ul>
-            <p>we welcome your inquiries and collaboration at any time!</p>
-            <p>feel free to contact us via email or through the links below. we look forward to hearing from you!</p>
+            <p>ご連絡・コラボレーションはいつでも歓迎です！</p>
+            <p>メールまたは各種リンクからお気軽にどうぞ。どうぞ〜 ^_^</p>
           </div>
         </article>
       </section>
     </section>
-    
+
+    <section class="player" aria-label="Spotify music player">
+      <div class="song">latest played：Lamp - 冷たい夜の光</div>
+      <div class="controls" aria-hidden="true"><span class="play">▷</span><span class="slider"></span><span>♫</span><span class="duration">0:00 | Spotify</span></div>
+      <button class="spotify" id="spotifyBtn" type="button">● Open in Spotify</button>
+    </section>
+
     <section class="spotify-live" aria-label="Reproductor de Spotify incrustado">
       <div class="stamp">
-        <span>songs i've been listening to lately - 最近聴いた曲</span>
+        <span>音楽 iframe</span>
         <span>click ▶ to listen</span>
+        <span>ページ内再生</span>
       </div>
       <div class="spotify-frame">
         <iframe
@@ -317,8 +324,8 @@
     </form>
 
     <footer class="footer">
-      <span>" 未来をデザインし、データで理解する。"</span>
-      <span class="credit">© 2026 Felipe Lizama-Mora - powered by GitHub | RAVEN - プログラム</span>
+      <span>✿ 未来をデザインし、データで理解する。✿</span>
+      <span class="credit">© 2026 Felipe Lizama-Mora | powered by GitHub Pages | RAVEN - プログラム</span>
     </footer>
   </main>
 
