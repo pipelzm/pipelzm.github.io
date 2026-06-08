@@ -7,7 +7,7 @@
   <title>pipelzm // bt</title>
   <meta name="description" content="Página personal de Felipe Lizama." />
 
-  <!-- General icons: message, phone, signal, RSS, etc. -->
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <style>
@@ -19,6 +19,7 @@
       --gray:#ededeb;
       --mid:#b9b9b4;
       --line:2px solid var(--ink);
+      --thin:1px solid var(--ink);
       --mono:"MS Gothic","Yu Gothic Mono","Osaka","Chicago","Pixel Operator","Arial",monospace;
     }
 
@@ -35,291 +36,305 @@
       min-height:100vh;
       color:var(--ink);
       font-family:var(--mono);
-      font-size:16px;
-      line-height:1.18;
+      font-size:12px;
+      line-height:1.05;
       background:
-        linear-gradient(90deg,rgba(255,255,255,.72) 2px,transparent 2px) 0 0/76px 76px,
-        linear-gradient(0deg,rgba(255,255,255,.72) 2px,transparent 2px) 0 0/76px 76px,
+        linear-gradient(90deg,rgba(255,255,255,.70) 2px,transparent 2px) 0 0/36px 36px,
+        linear-gradient(0deg,rgba(255,255,255,.70) 2px,transparent 2px) 0 0/36px 36px,
         var(--bg);
       display:grid;
       place-items:center;
-      padding:34px 18px;
+      padding:26px 10px;
     }
 
     a{
       color:var(--ink);
+      text-decoration:none;
+    }
+
+    a:hover{
+      background:var(--ink);
+      color:var(--white);
     }
 
     img{
-      max-width:100%;
       display:block;
+      max-width:100%;
     }
 
-    .site-window{
-      width:min(860px,100%);
+    .outer-frame{
+      width:492px;
+      max-width:100%;
       background:var(--paper);
-      border:var(--line);
+      border:2px solid var(--ink);
+      border-radius:10px;
       outline:2px dashed var(--ink);
-      outline-offset:6px;
-      box-shadow:8px 8px 0 rgba(0,0,0,.18);
+      outline-offset:5px;
       padding:8px;
+      box-shadow:4px 4px 0 rgba(0,0,0,.12);
     }
 
-    .top-bar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      background:var(--white);
+    .inner-window{
       border:var(--line);
-      padding:4px 7px;
+      background:var(--white);
+      padding:4px;
+    }
+
+    .topbar{
+      height:23px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:center;
+      border:var(--thin);
+      background:var(--gray);
+      padding:2px 6px;
       font-size:14px;
-      line-height:1;
+      font-weight:700;
     }
 
     .status-icons{
       display:flex;
       align-items:center;
-      gap:6px;
+      gap:5px;
       font-size:16px;
+      line-height:1;
     }
 
     .status-icons i{
       display:inline-block;
       color:var(--ink);
-      line-height:1;
-      transform:translateY(1px);
-      filter:contrast(200%);
+      filter:contrast(180%);
     }
 
-    .top-time{
+    .time-login{
       white-space:nowrap;
-      font-weight:700;
+      font-size:14px;
     }
 
-    .top-time a{
-      color:var(--ink);
-      text-decoration:none;
-      border-bottom:1px dotted var(--ink);
-    }
-
-    .top-time a:hover{
-      background:var(--ink);
-      color:var(--white);
-    }
-
-    .nav-bar{
-      display:flex;
-      justify-content:space-between;
+    .navigation{
+      height:22px;
+      display:grid;
+      grid-template-columns:128px 1fr;
       align-items:center;
-      gap:8px;
-      background:var(--gray);
-      border-left:var(--line);
-      border-right:var(--line);
-      border-bottom:var(--line);
-      padding:4px 7px;
+      border-left:var(--thin);
+      border-right:var(--thin);
+      border-bottom:var(--thin);
+      background:var(--white);
       font-size:14px;
       font-weight:700;
+    }
+
+    .navigation .label{
+      padding-left:7px;
     }
 
     .nav-links{
-      display:flex;
-      gap:5px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .nav-links a{
-      color:var(--ink);
-      text-decoration:none;
-    }
-
-    .nav-links a:hover{
-      background:var(--ink);
-      color:var(--white);
-    }
-
-    .layout{
-      display:grid;
-      grid-template-columns:230px 1fr;
-      gap:8px;
-      margin-top:8px;
-    }
-
-    .panel{
-      background:var(--white);
-      border:var(--line);
-      padding:7px;
-    }
-
-    .panel-title{
-      font-weight:700;
-      background:var(--gray);
-      border:1px solid var(--ink);
-      padding:3px 5px;
-      margin-bottom:6px;
-      font-size:14px;
-    }
-
-    .tag-list{
-      margin:0;
-      padding:0;
-      list-style:none;
-      font-size:13px;
-    }
-
-    .tag-list li{
-      border-bottom:1px dotted var(--mid);
-      padding:3px 0;
-    }
-
-    .profile-icon{
-      width:96px;
-      height:96px;
-      border:var(--line);
-      background:var(--gray);
-      margin:8px auto;
-      object-fit:cover;
-      image-rendering:pixelated;
-    }
-
-    .mini-button{
-      display:block;
-      width:100%;
-      text-align:center;
-      background:var(--gray);
-      border:1px solid var(--ink);
-      padding:5px;
-      margin:7px 0;
-      text-decoration:none;
-      font-size:13px;
-      font-weight:700;
-    }
-
-    .mini-button:hover{
-      background:var(--ink);
-      color:var(--white);
-    }
-
-    .kaomoji{
-      text-align:center;
-      font-size:20px;
-      margin:8px 0 4px;
-      letter-spacing:1px;
-    }
-
-    .now-playing{
-      border:var(--line);
-      background:var(--white);
-      margin-top:8px;
-      padding:4px 6px;
-      font-size:14px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
-    .now-playing strong{
+      text-align:right;
+      padding-right:6px;
       white-space:nowrap;
     }
 
-    .player-bar{
-      flex:1;
-      min-width:150px;
-      height:8px;
-      border:1px solid var(--ink);
-      background:
-        linear-gradient(90deg,var(--ink) 0 48%,transparent 48% 100%),
-        var(--gray);
-      position:relative;
+    .nav-links a{
+      padding:0 1px;
     }
 
-    .player-bar::after{
+    .main-grid{
+      display:grid;
+      grid-template-columns:134px 1fr;
+      gap:4px;
+      margin-top:4px;
+    }
+
+    .left-col,
+    .right-col{
+      display:grid;
+      gap:4px;
+    }
+
+    .box{
+      border:var(--thin);
+      background:var(--white);
+      padding:4px;
+    }
+
+    .box-title{
+      font-weight:700;
+      font-size:12px;
+      margin-bottom:3px;
+    }
+
+    .tag-text{
+      border:1px solid var(--mid);
+      padding:3px;
+      min-height:48px;
+      font-size:12px;
+      line-height:1.05;
+      background:#fff;
+    }
+
+    .dni-button{
+      display:block;
+      margin-top:5px;
+      text-align:center;
+      padding:5px 2px;
+      background:var(--gray);
+      color:#777;
+      font-weight:700;
+      border:1px solid transparent;
+      font-size:12px;
+    }
+
+    .dni-button:hover{
+      background:var(--ink);
+      color:var(--white);
+    }
+
+    .pixel-card{
+      text-align:center;
+      font-size:12px;
+      line-height:1;
+      min-height:72px;
+    }
+
+    .pixel-art{
+      font-size:22px;
+      line-height:.95;
+      letter-spacing:-1px;
+      margin:3px 0;
+      white-space:pre;
+    }
+
+    .mini-line{
+      font-size:11px;
+      text-align:left;
+      margin-top:2px;
+    }
+
+    .now-small{
+      font-size:12px;
+      line-height:1.05;
+    }
+
+    .post{
+      border:var(--thin);
+      background:var(--white);
+      padding:4px;
+    }
+
+    .post-head{
+      display:flex;
+      justify-content:space-between;
+      gap:4px;
+      font-weight:700;
+      font-size:12px;
+      margin-bottom:3px;
+      white-space:nowrap;
+    }
+
+    .post-head span:first-child{
+      background:var(--gray);
+      padding:1px 3px;
+    }
+
+    .post p{
+      margin:0;
+      border:1px solid var(--mid);
+      padding:4px;
+      font-size:12px;
+      line-height:1.12;
+      background:#fff;
+    }
+
+    .post + .post{
+      margin-top:4px;
+    }
+
+    .songbar{
+      margin-top:4px;
+      border:var(--thin);
+      background:var(--white);
+      display:grid;
+      grid-template-columns:auto 1fr auto auto;
+      align-items:center;
+      gap:5px;
+      padding:2px 5px;
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    .song-title{
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .play-button{
+      font-size:13px;
+      line-height:1;
+    }
+
+    .progress{
+      height:6px;
+      border:1px solid var(--ink);
+      background:
+        linear-gradient(90deg,var(--ink) 0 52%,transparent 52% 100%),
+        var(--gray);
+      position:relative;
+      min-width:90px;
+    }
+
+    .progress::after{
       content:"";
-      width:10px;
-      height:10px;
+      width:8px;
+      height:8px;
       background:var(--ink);
       border-radius:50%;
       position:absolute;
       top:50%;
-      left:48%;
+      left:52%;
       transform:translate(-50%,-50%);
     }
 
-    .content-grid{
+    .bottom-row{
+      margin-top:4px;
+      border:var(--thin);
+      background:var(--white);
       display:grid;
-      gap:8px;
-    }
-
-    .post{
-      background:var(--white);
-      border:var(--line);
-      padding:7px;
-    }
-
-    .post-header{
-      display:flex;
-      justify-content:space-between;
-      gap:8px;
-      border-bottom:1px dotted var(--mid);
-      padding-bottom:4px;
-      margin-bottom:6px;
-      font-size:14px;
-      font-weight:700;
-    }
-
-    .post h1,
-    .post h2,
-    .post h3{
-      margin:0 0 6px;
-      font-size:18px;
-    }
-
-    .post p{
-      margin:0 0 8px;
-      font-size:14px;
-    }
-
-    .project-list{
-      margin:0;
-      padding-left:18px;
-      font-size:14px;
-    }
-
-    .project-list li{
-      margin-bottom:5px;
-    }
-
-    .social-strip{
-      display:flex;
+      grid-template-columns:150px 1fr;
       align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      background:var(--white);
-      border:var(--line);
-      padding:5px 7px;
-      margin-top:8px;
-      font-size:14px;
+      gap:6px;
+      padding:3px 5px;
+      font-size:12px;
+    }
+
+    .web-label{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .social-feedback{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:5px;
     }
 
     .social-icons{
       display:flex;
       align-items:center;
-      gap:7px;
-      flex-wrap:wrap;
+      gap:4px;
+      white-space:nowrap;
     }
 
     .social-icons a{
-      width:20px;
-      height:20px;
+      width:16px;
+      height:16px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       border:1px solid transparent;
-      text-decoration:none;
-      color:var(--ink);
-      font-size:15px;
+      font-size:13px;
     }
 
     .social-icons a:hover{
@@ -328,101 +343,83 @@
     }
 
     .social-icons img{
-      width:15px;
-      height:15px;
-      display:block;
+      width:13px;
+      height:13px;
       filter:grayscale(1) contrast(200%);
     }
 
-    .mini-label{
-      font-weight:700;
-      white-space:nowrap;
-    }
-
-    .feedback-form{
-      display:grid;
-      gap:6px;
-      margin-top:6px;
-    }
-
-    .feedback-form input,
-    .feedback-form textarea{
+    .feedback-input{
+      height:18px;
+      border:var(--thin);
+      background:#fff;
+      font-family:var(--mono);
+      font-size:11px;
+      padding:1px 4px;
       width:100%;
-      border:1px solid var(--ink);
-      background:var(--paper);
-      color:var(--ink);
-      font-family:var(--mono);
-      font-size:13px;
-      padding:5px;
-      resize:vertical;
+      min-width:70px;
     }
 
-    .feedback-form textarea{
-      min-height:70px;
-    }
-
-    .feedback-form button{
-      border:var(--line);
+    .send-btn{
+      height:18px;
+      border:var(--thin);
       background:var(--gray);
-      color:var(--ink);
       font-family:var(--mono);
+      font-size:11px;
       font-weight:700;
-      padding:6px;
+      padding:0 5px;
       cursor:pointer;
     }
 
-    .feedback-form button:hover{
+    .send-btn:hover{
       background:var(--ink);
       color:var(--white);
     }
 
-    .footer-note{
-      margin-top:8px;
-      text-align:center;
-      font-size:12px;
-      opacity:.85;
-    }
+    @media(max-width:540px){
+      .outer-frame{
+        width:94vw;
+      }
 
-    @media(max-width:700px){
-      .layout{
+      .navigation{
+        grid-template-columns:1fr;
+        height:auto;
+        gap:2px;
+        padding:3px 0;
+      }
+
+      .navigation .label,
+      .nav-links{
+        text-align:left;
+        padding-left:6px;
+        padding-right:6px;
+        white-space:normal;
+      }
+
+      .main-grid{
         grid-template-columns:1fr;
       }
 
-      .social-strip{
-        align-items:flex-start;
-        flex-direction:column;
+      .bottom-row{
+        grid-template-columns:1fr;
       }
 
-      .mini-label{
-        white-space:normal;
-      }
-    }
-
-    @media(max-width:560px){
-      body{
-        padding:24px 12px;
-        font-size:14px;
+      .songbar{
+        grid-template-columns:auto 1fr;
       }
 
-      .top-bar,
-      .nav-bar,
-      .social-strip,
-      .now-playing{
+      .progress,
+      .song-time{
+        display:none;
+      }
+
+      .topbar{
+        grid-template-columns:1fr;
+        height:auto;
+        gap:3px;
+      }
+
+      .time-login{
         font-size:12px;
-      }
-
-      .status-icons{
-        font-size:14px;
-        gap:4px;
-      }
-
-      .top-time{
-        font-size:12px;
-      }
-
-      .post-header{
-        flex-direction:column;
-        gap:2px;
       }
     }
   </style>
@@ -430,214 +427,156 @@
 
 <body id="top">
 
-  <main class="site-window">
+  <main class="outer-frame">
+    <section class="inner-window">
 
-    <header class="top-bar">
-      <div class="status-icons" aria-label="Status icons">
-        <i class="bi bi-envelope-fill" title="Mail"></i>
-        <i class="bi bi-chat-left-fill" title="Message"></i>
-        <i class="bi bi-telephone-fill" title="Phone"></i>
-        <i class="bi bi-reception-4" title="Signal"></i>
-        <i class="bi bi-wifi" title="WiFi"></i>
-        <i class="bi bi-rss-fill" title="RSS"></i>
-      </div>
+      <header class="topbar">
+        <div class="status-icons" aria-label="status icons">
+          <i class="bi bi-envelope-fill" title="mail"></i>
+          <i class="bi bi-chat-left-fill" title="message"></i>
+          <i class="bi bi-telephone-fill" title="phone"></i>
+          <i class="bi bi-reception-4" title="signal"></i>
+          <i class="bi bi-wifi" title="wifi"></i>
+          <i class="bi bi-rss-fill" title="rss"></i>
+        </div>
 
-      <div class="top-time">
-        時間: <span id="clock">4:44 AM</span> ·
-        <a href="#feedback">ログイン</a> |
-        <a href="#top">終了</a>
-      </div>
-    </header>
+        <div class="time-login">
+          Time : <span id="clock">4:44 AM</span> ·
+          <a href="#feedback">Login</a> |
+          <a href="#top">Exit</a>
+        </div>
+      </header>
 
-    <nav class="nav-bar">
-      <span>ナビゲーション:</span>
+      <nav class="navigation">
+        <div class="label">Navigation:</div>
 
-      <div class="nav-links">
-        <a href="#home">ホーム</a>
-        <span>|</span>
-        <a href="#about">自己紹介</a>
-        <span>|</span>
-        <a href="#projects">プロジェクト</a>
-        <span>|</span>
-        <a href="#notes">ノート</a>
-        <span>|</span>
-        <a href="#feedback">フィードバック</a>
-      </div>
-    </nav>
+        <div class="nav-links">
+          <a href="#home">ホーム</a> |
+          <a href="#about">自己紹介</a> |
+          <a href="#projects">研究</a> |
+          <a href="#notes">ノート</a> |
+          <a href="#feedback">Feedback</a>
+        </div>
+      </nav>
 
-    <section class="layout">
+      <section class="main-grid">
 
-      <aside class="panel">
-        <div class="panel-title">タグ :</div>
+        <aside class="left-col">
 
-        <ul class="tag-list">
-          <li>bioinformatics</li>
-          <li>cheminformatics</li>
-          <li>molecular docking</li>
-          <li>molecular dynamics</li>
-          <li>日本語 / Japanese notes</li>
-        </ul>
+          <section class="box">
+            <div class="box-title">タグ :</div>
 
-        <a class="mini-button" href="#about">プロフィールを見る</a>
+            <div class="tag-text">
+              bioinformatics<br>
+              molecular docking<br>
+              cheminformatics<br>
+              日本語 notes
+            </div>
 
-        <img class="profile-icon" src="icon.png" alt="pipelzm icon">
+            <a class="dni-button" href="#about">Extended Profile</a>
+          </section>
 
-        <div class="kaomoji">⌁(˶ᵔ ᵕ ᵔ˶)⌁</div>
+          <section class="box pixel-card">
+            <div class="pixel-art">☁ {˶ᵔ ᵕ ᵔ˶} 彡</div>
+            <div class="mini-line">▷ v.01 / 2026</div>
+            <div class="mini-line">研究 · code · music</div>
+          </section>
 
-        <div class="panel-title">再生中 :</div>
-        <p>
-          Ironina - Niru Kajitsu<br>
-          research · code · music
-        </p>
-      </aside>
+          <section class="box now-small">
+            <div class="box-title">Now Playing:</div>
+            Ironina - 煮ル果実<br>
+            “Aren't you and I<br>
+            both fiction?”
+          </section>
 
-      <section class="content-grid">
+        </aside>
 
-        <article class="post" id="home">
-          <div class="post-header">
-            <span>はじめに</span>
-            <span>Posted : 06:06 AM</span>
-          </div>
+        <section class="right-col">
 
-          <h1>ホーム // pipelzm</h1>
-          <p>
-            Welcome to my personal website. This space is focused on biotechnology,
-            bioinformatics, cheminformatics, molecular docking, molecular dynamics,
-            data analysis and experimental digital projects.
-          </p>
-          <p>
-            I like mixing science, code, music, Japanese-inspired design and small
-            personal notes into a compact retro-style interface.
-          </p>
-        </article>
+          <article class="post" id="home">
+            <div class="post-head">
+              <span>はじめに!</span>
+              <span>Posted : 06:06 AM</span>
+            </div>
 
-        <article class="post" id="about">
-          <div class="post-header">
-            <span>自己紹介</span>
-            <span>Posted : 09:09 AM</span>
-          </div>
+            <p>
+              Welcome to my personal website. I’m Felipe Lizama, a biotechnologist
+              focused on bioinformatics, cheminformatics, molecular docking and
+              molecular dynamics. This page works like a tiny digital notebook for
+              research, code, music and quiet experiments ♡
+            </p>
+          </article>
 
-          <h2>私について</h2>
-          <p>
-            My name is Felipe Lizama Mora. I am a biotechnologist interested in
-            bioinformatics, cheminformatics, applied research, molecular modeling
-            and scientific software tools.
-          </p>
-          <p>
-            My current work is centered on molecular docking workflows, consensus
-            ranking, ligand and receptor preparation, protein-ligand analysis and
-            molecular dynamics simulations using high-performance computing resources.
-          </p>
-        </article>
+          <article class="post" id="about">
+            <div class="post-head">
+              <span>自己紹介!</span>
+              <span>Posted : 09:09 AM</span>
+            </div>
 
-        <article class="post" id="projects">
-          <div class="post-header">
-            <span>プロジェクト</span>
-            <span>Posted : 10:22 AM</span>
-          </div>
+            <p>
+              My current work explores protein-ligand systems using docking,
+              consensus ranking and MD simulations. I’m interested in scientific
+              software, data analysis, Japanese-inspired design and building small
+              tools for research workflows.
+            </p>
+          </article>
 
-          <h2>研究プロジェクト</h2>
+          <article class="post" id="projects">
+            <div class="post-head">
+              <span>研究メモ!</span>
+              <span>Posted : 10:22 AM</span>
+            </div>
 
-          <ul class="project-list">
-            <li>
-              <strong>KRASG12D / 7RPZ:</strong> massive docking, consensus ranking,
-              visual inspection, molecular dynamics and stability analysis.
-            </li>
-            <li>
-              <strong>1P0I / 4EY7:</strong> comparative candidate screening,
-              preselection for MD and structural analysis of protein-ligand complexes.
-            </li>
-            <li>
-              <strong>Personal website:</strong> retro webcore layout, Japanese-inspired
-              aesthetics, academic profiles and experimental interface design.
-            </li>
-          </ul>
-        </article>
+            <p>
+              Projects include KRASG12D / 7RPZ screening, 1P0I / 4EY7 comparison,
+              ligand preparation, receptor cleaning, visual inspection and stability
+              analysis. Small steps, consistent logs, better science.
+            </p>
+          </article>
 
-        <article class="post" id="notes">
-          <div class="post-header">
-            <span>ノート</span>
-            <span>Posted : 11:11 AM</span>
-          </div>
-
-          <h2>小さなメモ</h2>
-          <p>
-            “Small steps, consistent work and clear documentation can turn a simple
-            idea into a serious research project.”
-          </p>
-          <p>
-            小さなステップ、大きな研究。A small daily improvement can become a meaningful
-            scientific workflow over time.
-          </p>
-        </article>
-
-        <article class="post" id="feedback">
-          <div class="post-header">
-            <span>フィードバック</span>
-            <span>Posted : 12:00 PM</span>
-          </div>
-
-          <h2>メッセージ</h2>
-          <p>
-            You can leave a message, suggestion or contact request here. This form
-            will open your email client and prepare a message addressed to me.
-          </p>
-
-          <form class="feedback-form" action="mailto:felipelzm02@gmail.com" method="post" enctype="text/plain">
-            <input type="text" name="name" placeholder="Username / Name">
-            <input type="email" name="email" placeholder="Email">
-            <textarea name="message" placeholder="Write your feedback here..."></textarea>
-            <button type="submit">送信 / Send Feedback</button>
-          </form>
-        </article>
-
+        </section>
       </section>
+
+      <section class="songbar">
+        <strong>Song Playing:</strong>
+        <span class="song-title">Ironina by Niru Kajitsu</span>
+        <span class="play-button">▷</span>
+        <div class="progress" aria-hidden="true"></div>
+        <span class="song-time">2:09 | 3:52</span>
+      </section>
+
+      <section class="bottom-row" id="feedback">
+        <div class="web-label">≡ @pipelzm's Website . . . ♡</div>
+
+        <form class="social-feedback" action="mailto:felipelzm02@gmail.com" method="post" enctype="text/plain">
+          <div class="social-icons" aria-label="social links">
+            <a href="mailto:felipelzm02@gmail.com" title="Email">
+              <i class="bi bi-envelope-fill"></i>
+            </a>
+
+            <a href="https://github.com/pipelzm" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="https://cdn.simpleicons.org/github/111111" alt="GitHub">
+            </a>
+
+            <a href="TU_LINK_DE_LINKEDIN" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+              <img src="https://cdn.simpleicons.org/linkedin/111111" alt="LinkedIn">
+            </a>
+
+            <a href="TU_LINK_DE_ORCID" target="_blank" rel="noopener noreferrer" title="ORCID">
+              <img src="https://cdn.simpleicons.org/orcid/111111" alt="ORCID">
+            </a>
+
+            <a href="TU_LINK_DE_GOOGLE_SCHOLAR" target="_blank" rel="noopener noreferrer" title="Google Scholar">
+              <img src="https://cdn.simpleicons.org/googlescholar/111111" alt="Google Scholar">
+            </a>
+          </div>
+
+          <input class="feedback-input" type="text" name="feedback" placeholder="Feedback...">
+          <button class="send-btn" type="submit">Send</button>
+        </form>
+      </section>
+
     </section>
-
-    <section class="now-playing">
-      <strong>再生中:</strong>
-      <span>Ironina by Niru Kajitsu</span>
-      <span>▷</span>
-      <div class="player-bar" aria-hidden="true"></div>
-      <span>2:09 | 3:52</span>
-    </section>
-
-    <section class="social-strip">
-      <span class="mini-label">≡ @pipelzm's Website . . . ♡</span>
-
-      <div class="social-icons" aria-label="Social and academic profiles">
-
-        <a href="mailto:felipelzm02@gmail.com" title="Email">
-          <i class="bi bi-envelope-fill"></i>
-        </a>
-
-        <a href="https://github.com/pipelzm" target="_blank" rel="noopener noreferrer" title="GitHub">
-          <img src="https://cdn.simpleicons.org/github/111111" alt="GitHub">
-        </a>
-
-        <a href="TU_LINK_DE_LINKEDIN" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-          <img src="https://cdn.simpleicons.org/linkedin/111111" alt="LinkedIn">
-        </a>
-
-        <a href="TU_LINK_DE_ORCID" target="_blank" rel="noopener noreferrer" title="ORCID">
-          <img src="https://cdn.simpleicons.org/orcid/111111" alt="ORCID">
-        </a>
-
-        <a href="TU_LINK_DE_GOOGLE_SCHOLAR" target="_blank" rel="noopener noreferrer" title="Google Scholar">
-          <img src="https://cdn.simpleicons.org/googlescholar/111111" alt="Google Scholar">
-        </a>
-
-        <a href="TU_LINK_DE_SPOTIFY" target="_blank" rel="noopener noreferrer" title="Spotify">
-          <img src="https://cdn.simpleicons.org/spotify/111111" alt="Spotify">
-        </a>
-
-      </div>
-    </section>
-
-    <p class="footer-note">
-      © pipelzm // research, code & quiet experiments — 研究中
-    </p>
-
   </main>
 
   <script>
