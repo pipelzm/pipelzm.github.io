@@ -1,631 +1,187 @@
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>@pipelzm's Website</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    :root {
-      --site-width: min(1180px, 96vw);
-      --bg: #d7d7d1;
-      --paper: #f6f6f1;
-      --white: #ffffff;
-      --black: #000000;
-      --line: #000000;
-      --muted: #777777;
-      --soft: #e8e8e3;
-      --grid-size: 48px;
-      --font-main: Arial, Helvetica, sans-serif;
-    }
-
-    html,
-    body {
-      margin: 0;
-      min-height: 100%;
-    }
-
-    body {
-      min-height: 100vh;
-      font-family: var(--font-main);
-      color: var(--black);
-      background-color: var(--bg);
-      background-image:
-        linear-gradient(#ffffff 2px, transparent 2px),
-        linear-gradient(90deg, #ffffff 2px, transparent 2px);
-      background-size: var(--grid-size) var(--grid-size);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: 24px;
-    }
-
-    a {
-      color: var(--black);
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    button,
-    input {
-      font-family: var(--font-main);
-    }
-
-    .page-wrap {
-      width: var(--site-width);
-      padding: 14px;
-      border: 3px dashed var(--black);
-      border-radius: 20px;
-      background: transparent;
-    }
-
-    .window {
-      width: 100%;
-      background: var(--paper);
-      border: 4px solid var(--black);
-      border-radius: 16px;
-      padding: 10px;
-      box-shadow:
-        0 0 0 3px var(--paper) inset,
-        0 0 0 1px var(--black);
-    }
-
-    .inner-window {
-      border: 2px solid var(--black);
-      background: var(--white);
-      padding: 7px;
-    }
-
-    .top-bar {
-      min-height: 34px;
-      border: 2px solid var(--black);
-      background: var(--paper);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 0 12px;
-      font-size: clamp(15px, 1.4vw, 20px);
-      font-weight: 700;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .icons {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: clamp(16px, 1.4vw, 21px);
-    }
-
-    .time-area {
-      text-align: right;
-    }
-
-    .navigation {
-      margin-top: 6px;
-      min-height: 36px;
-      border-left: 2px solid var(--black);
-      border-right: 2px solid var(--black);
-      border-bottom: 2px solid var(--black);
-      background: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 0 12px;
-      font-size: clamp(15px, 1.4vw, 20px);
-      font-weight: 700;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-    }
-
-    .layout {
-      margin-top: 7px;
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 8px;
-    }
-
-    .left-col,
-    .right-col {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .box {
-      border: 2px solid var(--black);
-      background: var(--white);
-    }
-
-    .box-title {
-      font-size: clamp(15px, 1.3vw, 18px);
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .tag-box {
-      min-height: 230px;
-      padding: 12px;
-    }
-
-    .tags {
-      border: 1px solid #999;
-      padding: 10px;
-      min-height: 112px;
-      font-size: clamp(14px, 1.2vw, 18px);
-      line-height: 1.08;
-    }
-
-    .profile-btn {
-      margin-top: 10px;
-      width: 100%;
-      height: 38px;
-      border: 1px solid #999;
-      background: var(--soft);
-      color: var(--muted);
-      font-size: clamp(14px, 1.2vw, 17px);
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .character-box {
-      min-height: 170px;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      padding: 14px;
-    }
-
-    .cat {
-      text-align: center;
-      font-size: clamp(28px, 3vw, 44px);
-      line-height: 1;
-      letter-spacing: 1px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .version {
-      font-size: clamp(14px, 1.2vw, 18px);
-      line-height: 1.2;
-    }
-
-    .now-playing {
-      min-height: 136px;
-      padding: 12px;
-      font-size: clamp(14px, 1.2vw, 18px);
-      line-height: 1.1;
-    }
-
-    .now-playing strong {
-      font-size: clamp(15px, 1.3vw, 19px);
-    }
-
-    .post {
-      border: 2px solid var(--black);
-      background: var(--white);
-      padding: 9px 10px 11px;
-    }
-
-    .post-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      border-bottom: 1px solid #999;
-      margin-bottom: 8px;
-      padding-bottom: 4px;
-      font-size: clamp(15px, 1.3vw, 19px);
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .post-time {
-      white-space: nowrap;
-    }
-
-    .post p {
-      margin: 0;
-      font-size: clamp(15px, 1.24vw, 18px);
-      line-height: 1.12;
-    }
-
-    .song-bar {
-      margin-top: 8px;
-      min-height: 64px;
-      border: 2px solid var(--black);
-      background: var(--white);
-      display: grid;
-      grid-template-columns: 1fr 260px;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 12px;
-      font-size: clamp(15px, 1.25vw, 18px);
-    }
-
-    .song-title {
-      margin-bottom: 5px;
-    }
-
-    .player {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 8px;
-      font-size: 17px;
-    }
-
-    input[type="range"] {
-      width: 190px;
-      accent-color: var(--black);
-    }
-
-    .bottom-bar {
-      margin-top: 7px;
-      min-height: 38px;
-      border: 2px solid var(--black);
-      background: var(--white);
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      align-items: center;
-      gap: 12px;
-      padding: 5px 10px;
-      font-size: clamp(14px, 1.2vw, 18px);
-    }
-
-    .footer-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-
-    .footer-icons {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: clamp(15px, 1.3vw, 19px);
-    }
-
-    .feedback {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .feedback input {
-      width: 100%;
-      height: 27px;
-      border: 2px solid var(--black);
-      padding: 2px 7px;
-      font-size: 14px;
-      background: var(--white);
-    }
-
-    .feedback button {
-      height: 27px;
-      border: 2px solid var(--black);
-      background: var(--soft);
-      font-size: 14px;
-      font-weight: 700;
-      padding: 0 10px;
-      cursor: pointer;
-    }
-
-    .feedback button:hover,
-    .profile-btn:hover {
-      background: #dcdcd7;
-    }
-
-    .tiny-divider {
-      opacity: 0.85;
-    }
-
-    @media (max-width: 900px) {
-      body {
-        overflow: auto;
-        align-items: flex-start;
-      }
-
-      .page-wrap {
-        width: 96vw;
-      }
-
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .song-bar,
-      .bottom-bar {
-        grid-template-columns: 1fr;
-      }
-
-      .player {
-        justify-content: flex-start;
-      }
-
-      input[type="range"] {
-        width: min(240px, 70vw);
-      }
-
-      .navigation {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 8px 12px;
-      }
-
-      .nav-links {
-        flex-wrap: wrap;
-      }
-
-      .top-bar {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 8px 12px;
-      }
-
-      .time-area {
-        text-align: left;
-      }
-
-      .footer-left {
-        white-space: normal;
-      }
-    }
-
-    @media (max-width: 520px) {
-      body {
-        padding: 12px;
-      }
-
-      .page-wrap {
-        padding: 9px;
-        border-radius: 14px;
-      }
-
-      .window {
-        padding: 7px;
-        border-radius: 12px;
-      }
-
-      .inner-window {
-        padding: 5px;
-      }
-
-      .post-head {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-  </style>
+  <title>@pipelzm — ホーム</title>
+  <meta name="description" content="Felipe Lizama-Mora — bioinformatics, molecular docking, cheminformatics. A tiny digital notebook." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <main class="page-wrap">
-    <section class="window">
-      <div class="inner-window">
 
-        <header class="top-bar">
-          <div class="icons" aria-label="decorative icons">
-            ✉ ◼ ☎ ▮▮ ≋ ▣
-          </div>
+  <!-- ===== Inline SVG icon sprite (monochrome line-art) ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 6h18v12H3z"/><path fill="none" stroke="currentColor" stroke-width="2" d="M3 7l9 6 9-6"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M4 5h16v10H9l-4 4V15H4z"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 3h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 4 5 2 2 0 0 1 6 3z"/></symbol>
+      <symbol id="i-signal" viewBox="0 0 24 24"><rect x="3" y="14" width="3" height="6" fill="currentColor"/><rect x="8" y="10" width="3" height="10" fill="currentColor"/><rect x="13" y="6" width="3" height="14" fill="currentColor"/><rect x="18" y="3" width="3" height="17" fill="currentColor"/></symbol>
+      <symbol id="i-wifi" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M2 8a16 16 0 0 1 20 0M5 12a11 11 0 0 1 14 0M8 16a6 6 0 0 1 8 0"/><circle cx="12" cy="19" r="1.4" fill="currentColor"/></symbol>
+      <symbol id="i-rss" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="2" d="M4 11a9 9 0 0 1 9 9M4 5a15 15 0 0 1 15 15"/></symbol>
+      <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 9 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.4-2.2-.300000000000001-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></symbol>
+      <symbol id="i-orcid" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><circle cx="8" cy="7" r="1.4" fill="#fff"/><rect x="7" y="9.5" width="2" height="8" fill="#fff"/><path fill="#fff" d="M11 9.5h4a4 4 0 0 1 0 8h-4zm2 2v4h2a2 2 0 0 0 0-4z"/></symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3" fill="currentColor"/><rect x="5" y="9" width="3" height="9" fill="#fff"/><circle cx="6.5" cy="6" r="1.6" fill="#fff"/><path fill="#fff" d="M11 9h3v1.3c.5-.8 1.5-1.5 3-1.5 2.5 0 3 1.6 3 4V18h-3v-4.5c0-1.1-.4-1.8-1.4-1.8s-1.6.7-1.6 1.8V18h-3z"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 20s-7-4.5-7-9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 7 3.5C19 15.5 12 20 12 20z"/></symbol>
+    </defs>
+  </svg>
 
-          <div class="time-area">
-            Time : <span id="clock">--:--</span> · Login | Exit
-          </div>
-        </header>
+  <div class="frame">
+    <div class="window">
 
-        <nav class="navigation">
-          <div>Navigation:</div>
-
-          <div class="nav-links">
-            <a href="#home">ホーム</a>
-            <span>|</span>
-            <a href="#about">自己紹介</a>
-            <span>|</span>
-            <a href="#research">研究</a>
-            <span>|</span>
-            <a href="#notes">ノート</a>
-            <span>|</span>
-            <a href="#feedback">Feedback</a>
-          </div>
-        </nav>
-
-        <section class="layout">
-
-          <aside class="left-col">
-            <section class="box tag-box">
-              <div class="box-title">タグ :</div>
-
-              <div class="tags">
-                bioinformatics<br>
-                molecular docking<br>
-                cheminformatics<br>
-                molecular dynamics<br>
-                KRASG12D / 7RPZ<br>
-                日本語 notes
-              </div>
-
-              <button class="profile-btn" type="button">
-                Extended Profile
-              </button>
-            </section>
-
-            <section class="box character-box">
-              <div class="cat">▴ {~‿~}彡</div>
-
-              <div class="version">
-                ▷ v.01 / 2026<br>
-                研究 · code · music<br>
-                quiet experiments
-              </div>
-            </section>
-
-            <section class="box now-playing">
-              <strong>Now Playing:</strong><br>
-              Ironina - 煮ル果実<br>
-              “Aren't you and I<br>
-              both fiction?”
-            </section>
-          </aside>
-
-          <section class="right-col">
-
-            <article class="post" id="home">
-              <div class="post-head">
-                <span>はじめに!</span>
-                <span class="post-time">Posted : 06:06 AM</span>
-              </div>
-
-              <p>
-                Welcome to my personal website. I’m Felipe Lizama, a
-                biotechnologist focused on bioinformatics, cheminformatics,
-                molecular docking and molecular dynamics. This page works like
-                a tiny digital notebook for research, code, music and quiet
-                experiments♡
-              </p>
-            </article>
-
-            <article class="post" id="about">
-              <div class="post-head">
-                <span>自己紹介!</span>
-                <span class="post-time">Posted : 09:09 AM</span>
-              </div>
-
-              <p>
-                My current work explores protein-ligand systems using docking,
-                consensus ranking and MD simulations. I’m interested in
-                scientific software, data analysis, Japanese-inspired design
-                and building small tools for research workflows.
-              </p>
-            </article>
-
-            <article class="post" id="research">
-              <div class="post-head">
-                <span>研究メモ!</span>
-                <span class="post-time">Posted : 10:22 AM</span>
-              </div>
-
-              <p>
-                Projects include KRASG12D / 7RPZ screening, 1P0I / 4EY7
-                comparison, ligand preparation, receptor cleaning, visual
-                inspection and stability analysis. Small steps, consistent
-                logs, better science.
-              </p>
-            </article>
-
-            <article class="post" id="notes">
-              <div class="post-head">
-                <span>ノート!</span>
-                <span class="post-time">Posted : 11:31 AM</span>
-              </div>
-
-              <p>
-                This space collects notes about code, simulations, Japanese
-                study, personal projects and small design experiments. The goal
-                is to keep everything simple, readable and alive, like an old
-                personal web notebook.
-              </p>
-            </article>
-
-          </section>
-        </section>
-
-        <section class="song-bar">
-          <div class="song-info">
-            <div class="song-title">
-              <strong>Song Playing:</strong> Ironina by Niru Kajitsu
-            </div>
-
-            <div>
-              <span id="song-current">2:09</span>
-              <span class="tiny-divider">|</span>
-              <span>3:52</span>
-            </div>
-          </div>
-
-          <div class="player">
-            <span>▷</span>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value="55"
-              aria-label="music progress"
-            />
-          </div>
-        </section>
-
-        <footer class="bottom-bar" id="feedback">
-          <div class="footer-left">
-            <span>≡ @pipelzm's Website . . ♡</span>
-            <span class="footer-icons">✉ ◖● ◉ ✿</span>
-          </div>
-
-          <form class="feedback" id="feedback-form">
-            <input
-              type="text"
-              id="feedback-input"
-              placeholder="Feedback..."
-              autocomplete="off"
-            />
-
-            <button type="submit">Send</button>
-          </form>
-        </footer>
-
+      <!-- ===== Top status bar ===== -->
+      <div class="topbar">
+        <div class="sys-icons">
+          <svg width="20" height="20"><use href="#i-mail"/></svg>
+          <svg width="20" height="20"><use href="#i-chat"/></svg>
+          <svg width="20" height="20"><use href="#i-phone"/></svg>
+          <svg width="20" height="20"><use href="#i-signal"/></svg>
+          <svg width="20" height="20"><use href="#i-wifi"/></svg>
+          <svg width="20" height="20"><use href="#i-rss"/></svg>
+        </div>
+        <div class="sys-right">
+          Time : <span data-clock>5:38 PM</span>
+          <span class="sep">·</span>
+          <a href="extended.html">Login</a> | <a href="#" onclick="return false">Exit</a>
+        </div>
       </div>
-    </section>
-  </main>
 
-  <script>
-    function updateClock() {
-      const now = new Date();
+      <!-- ===== Navigation (Feedback removed) ===== -->
+      <nav class="nav">
+        <span class="nav-label">Navigation:</span>
+        <span class="nav-links">
+          <a href="index.html" class="active">ホーム</a><span class="bar">|</span>
+          <a href="about.html">自己紹介</a><span class="bar">|</span>
+          <a href="research.html">研究</a><span class="bar">|</span>
+          <a href="notes.html">ノート</a>
+        </span>
+      </nav>
 
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, "0");
-      const ampm = hours >= 12 ? "PM" : "AM";
+      <!-- ===== Body ===== -->
+      <div class="body">
 
-      hours = hours % 12;
-      hours = hours ? hours : 12;
+        <!-- ----- Sidebar ----- -->
+        <aside class="sidebar">
 
-      document.getElementById("clock").textContent =
-        `${hours}:${minutes} ${ampm}`;
-    }
+          <!-- Tags + Extended profile button -->
+          <div class="box tags">
+            <div class="box-pad">
+              <div class="box-title">タグ：</div>
+            </div>
+            <ul class="tag-list">
+              <li>bioinformatics</li>
+              <li>molecular docking</li>
+              <li>cheminformatics</li>
+              <li>日本語 notes</li>
+            </ul>
+            <a class="btn-ext" href="extended.html">Extended Profile</a>
+          </div>
 
-    updateClock();
-    setInterval(updateClock, 1000);
+          <!-- GitHub repositories (replaces happy face) -->
+          <div class="box box-pad worldless">
+            <div class="repos-head">
+              <span class="box-title" style="margin:0">GitHub repos</span>
+              <span class="gh-logo"><svg width="18" height="18"><use href="#i-github"/></svg></span>
+            </div>
+            <ul class="repo-list" data-repos>
+              <li class="repos-loading">Loading repos…</li>
+            </ul>
+          </div>
 
-    const feedbackForm = document.getElementById("feedback-form");
-    const feedbackInput = document.getElementById("feedback-input");
+          <!-- World clock + mini map (replaces now playing text) -->
+          <div class="box box-pad worldclock">
+            <div class="box-title">Now Playing: World Times</div>
+            <div class="map-wrap">
+              <svg class="worldmap" viewBox="0 0 100 56" preserveAspectRatio="xMidYMid meet" role="img" aria-label="World map">
+                <!-- simplified landmasses -->
+                <g fill="#cfcfcf" stroke="#9a9a9a" stroke-width="0.4">
+                  <path d="M10,14 L26,11 L31,16 L28,22 L22,24 L14,22 L9,18 Z"/>
+                  <path d="M24,26 L31,25 L33,33 L30,44 L26,48 L24,40 L23,32 Z"/>
+                  <path d="M44,12 L54,11 L52,16 L47,17 L44,15 Z"/>
+                  <path d="M46,18 L55,18 L57,28 L52,40 L48,34 L46,26 Z"/>
+                  <path d="M58,10 L86,9 L92,16 L88,22 L78,24 L66,22 L60,16 Z"/>
+                  <path d="M82,40 L92,39 L94,45 L88,47 L83,45 Z"/>
+                </g>
+                <g data-dots></g>
+              </svg>
+            </div>
+            <ul class="clock-list" data-clocklist>
+              <li><span class="city">Santiago</span><span class="time">--:--</span></li>
+            </ul>
+          </div>
 
-    feedbackForm.addEventListener("submit", function(event) {
-      event.preventDefault();
+        </aside>
 
-      const text = feedbackInput.value.trim();
+        <!-- ----- Main content ----- -->
+        <main class="main">
 
-      if (!text) {
-        alert("Write something first.");
-        return;
-      }
+          <article class="post">
+            <div class="post-head"><span>はじめに!</span><span class="posted">Posted : 06:06 AM</span></div>
+            <div class="post-body">
+              <p>Welcome to my personal website. I'm Felipe Lizama, a biotechnologist
+              focused on bioinformatics, cheminformatics, molecular docking and molecular
+              dynamics. This page works like a tiny digital notebook for research, code,
+              music and quiet experiments <svg width="14" height="14" style="vertical-align:-1px"><use href="#i-heart"/></svg></p>
+            </div>
+          </article>
 
-      alert("Feedback saved locally. For GitHub Pages, this needs a backend to actually send messages.");
-      feedbackInput.value = "";
-    });
-  </script>
+          <article class="post">
+            <div class="post-head"><span>自己紹介!</span><span class="posted">Posted : 09:09 AM</span></div>
+            <div class="post-body">
+              <p>My current work explores protein-ligand systems using docking, consensus
+              ranking and MD simulations. I'm interested in scientific software, data
+              analysis, Japanese-inspired design and building small tools for research
+              workflows. <a href="about.html">More about me →</a></p>
+            </div>
+          </article>
+
+          <article class="post">
+            <div class="post-head"><span>研究メモ!</span><span class="posted">Posted : 10:22 AM</span></div>
+            <div class="post-body">
+              <p>Projects include KRASG12D / 7RPZ screening, 1P0I / 4EY7 comparison, ligand
+              preparation, receptor cleaning, visual inspection and stability analysis.
+              Small steps, consistent logs, better science. <a href="research.html">See research →</a></p>
+            </div>
+          </article>
+
+        </main>
+      </div>
+
+      <!-- ===== Spotify section (replaces song playing) ===== -->
+      <div class="spotify-bar">
+        <div class="sp-label">Song Playing — latest track on Spotify</div>
+        <!-- Replace the embed src with your track/playlist. See README. -->
+        <iframe
+          title="Spotify"
+          style="border-radius:12px"
+          src="https://open.spotify.com/embed/track/3n3Ppam7vgaVa1iaRUc9Lp?utm_source=generator&theme=0"
+          height="152"
+          frameborder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"></iframe>
+      </div>
+
+      <!-- ===== Bottom bar (footer) ===== -->
+      <footer class="bottombar">
+        <span class="credit">
+          <svg width="14" height="14" style="vertical-align:-2px"><use href="#i-heart"/></svg>
+          © 2026 Felipe Lizama-Mora | powered by GitHub Pages &amp; RAVEN
+        </span>
+        <span class="socials">
+          <a data-mailto href="#" title="Email"><svg width="18" height="18"><use href="#i-mail"/></svg></a>
+          <a href="https://github.com/pipelzm" target="_blank" rel="noopener" title="GitHub"><svg width="18" height="18"><use href="#i-github"/></svg></a>
+          <a href="https://orcid.org/" target="_blank" rel="noopener" title="ORCID"><svg width="18" height="18"><use href="#i-orcid"/></svg></a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" title="LinkedIn"><svg width="18" height="18"><use href="#i-linkedin"/></svg></a>
+        </span>
+        <form class="quickfb">
+          <input type="text" placeholder="Quick feedback…" aria-label="Quick feedback" />
+          <button type="submit">Send</button>
+        </form>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="site.js"></script>
 </body>
 </html>
