@@ -20,7 +20,7 @@ window.SITE_CONFIG = {
   // { "title":"Song", "artist":"Artist", "embedUrl":"https://open.spotify.com/embed/track/...", "externalUrl":"https://open.spotify.com/track/..." }
   spotifyStatusEndpoint: '',
 
-  // Redes: puedes reemplazar los links por los tuyos reales.
+  // Redes: reemplaza estos links por tus perfiles reales.
   socials: {
     email: 'mailto:felipelzm02@gmail.com',
     github: 'https://github.com/pipelzm',
@@ -29,12 +29,12 @@ window.SITE_CONFIG = {
     home: 'https://pipelzm.github.io'
   },
 
-  // Relojes del mini mapa mundial.
+  // Relojes globales. No hay mapa: solo horas en vivo.
   cityTimes: [
-    { city: 'Santiago', country: 'CL', tz: 'America/Santiago', x: 31, y: 75 },
-    { city: 'New York', country: 'US', tz: 'America/New_York', x: 28, y: 37 },
-    { city: 'London', country: 'UK', tz: 'Europe/London', x: 48, y: 31 },
-    { city: 'Tokyo', country: 'JP', tz: 'Asia/Tokyo', x: 82, y: 43 },
-    { city: 'Sydney', country: 'AU', tz: 'Australia/Sydney', x: 83, y: 76 }
+    { city: 'Santiago', country: 'CL', tz: 'America/Santiago' },
+    { city: 'New York', country: 'US', tz: 'America/New_York' },
+    { city: 'London', country: 'UK', tz: 'Europe/London' },
+    { city: 'Tokyo', country: 'JP', tz: 'Asia/Tokyo' },
+    { city: 'Sydney', country: 'AU', tz: 'Australia/Sydney' }
   ]
 };

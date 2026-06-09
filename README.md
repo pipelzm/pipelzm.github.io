@@ -1,49 +1,44 @@
-# Felipe Lizama-Mora · Retro Personal Website
+# Felipe Lizama-Mora · Retro personal website
 
-Sitio estático listo para GitHub Pages, inspirado en una estética monocromática tipo libreta digital / old web / retro OS.
+Sitio estático listo para GitHub Pages.
 
-## Estructura
+## Archivos principales
 
-```txt
-pipelzm_retro_site/
-├── index.html
-├── about.html
-├── projects.html
-├── resume.html
-├── contact.html
-└── assets/
-    ├── css/
-    │   └── styles.css
-    └── js/
-        ├── config.js
-        └── main.js
-```
+- `index.html`: home.
+- `about.html`: perfil extendido con foto.
+- `projects.html`: proyectos e investigación.
+- `resume.html`: CV ligero.
+- `contact.html`: contacto.
+- `assets/css/styles.css`: estética general.
+- `assets/js/config.js`: configuración rápida.
+- `assets/js/main.js`: reloj en vivo, horas globales, repos de GitHub, Spotify y feedback.
+- `assets/img/profile-halftone.png`: imagen del perfil.
 
-## Cómo subir a GitHub Pages
+## Cambios incluidos
 
-1. Crea o abre tu repositorio `pipelzm.github.io`.
-2. Sube todos los archivos de esta carpeta a la raíz del repositorio.
-3. En GitHub: `Settings > Pages`.
-4. Source: `Deploy from a branch`.
-5. Branch: `main`, folder `/root`.
-6. Guarda y espera unos minutos.
+- Se eliminó el mapa mundial.
+- Se dejó un bloque de horas alrededor del mundo, actualizado cada segundo.
+- El reloj superior también se actualiza cada segundo.
+- Se redujo el tamaño de la letra del cuerpo, manteniendo títulos y subtítulos grandes.
+- Se mejoraron los iconos superiores y los accesos sociales del footer.
+- Se agregó la imagen personal en `about.html`.
 
 ## Personalización rápida
 
-Edita `assets/js/config.js`:
+Edita `assets/js/config.js` para cambiar:
 
-- `githubUser`: usuario usado para cargar repositorios públicos.
-- `feedbackEmail`: correo usado por la barra de quick feedback.
-- `spotifyEmbedUrl`: URL del iframe embed de Spotify.
-- `spotifyStatusEndpoint`: opcional, para conectar una API propia que muestre la última canción escuchada.
-- `cityTimes`: ciudades y zonas horarias del mini mapa mundial.
-- `socials`: enlaces de redes.
+- usuario de GitHub;
+- correo de feedback;
+- enlaces de redes;
+- embed de Spotify;
+- ciudades del reloj global.
 
-## Sobre Spotify y la última canción escuchada
+## Subida a GitHub Pages
 
-GitHub Pages es estático y no puede guardar de forma segura los secretos de Spotify. Por eso el sitio trae dos modos:
+Copia todos estos archivos dentro del repositorio `pipelzm.github.io`, luego ejecuta:
 
-1. Modo simple: un iframe de Spotify que puedes cambiar manualmente en `config.js`.
-2. Modo avanzado: un endpoint externo/serverless en `spotifyStatusEndpoint` que devuelva la última canción y el `embedUrl`.
-
-No pongas `client_secret` de Spotify dentro del JavaScript público.
+```bash
+git add .
+git commit -m "Update retro personal website"
+git push origin main
+```
