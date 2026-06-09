@@ -4,12 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#d9d9d4" />
-  <title>pipelzm // bt</title>
-  <meta name="description" content="Página personal de Felipe Lizama." />
-
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+  <title>Felipe Lizama-Mora · retro jp</title>
+  <meta name="description" content="Página personal de Felipe Lizama-Mora con estética retro japonesa, biotecnología, bioinformática y proyectos." />
   <style>
     :root{
       --bg:#d9d9d4;
@@ -19,605 +15,288 @@
       --gray:#ededeb;
       --mid:#b9b9b4;
       --line:2px solid var(--ink);
-      --thin:1px solid var(--ink);
-      --mono:"MS Gothic","Yu Gothic Mono","Osaka","Chicago","Pixel Operator","Arial",monospace;
+      --mono:"MS Gothic","Yu Gothic Mono","Osaka","Chicago","Courier New",monospace;
     }
-
-    *{
-      box-sizing:border-box;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       min-height:100vh;
       color:var(--ink);
       font-family:var(--mono);
-      font-size:14px;
-      line-height:1.08;
+      font-size:16px;
+      line-height:1.18;
       background:
-        linear-gradient(90deg,rgba(255,255,255,.70) 2px,transparent 2px) 0 0/44px 44px,
-        linear-gradient(0deg,rgba(255,255,255,.70) 2px,transparent 2px) 0 0/44px 44px,
+        linear-gradient(90deg,rgba(255,255,255,.72) 2px,transparent 2px) 0 0/76px 76px,
+        linear-gradient(0deg,rgba(255,255,255,.72) 2px,transparent 2px) 0 0/76px 76px,
         var(--bg);
       display:grid;
       place-items:center;
-      padding:18px 10px;
-      overflow:hidden;
+      padding:34px 18px;
     }
-
-    a{
-      color:var(--ink);
-      text-decoration:none;
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at center,transparent 45%,rgba(0,0,0,.08)),
+        repeating-linear-gradient(0deg,rgba(255,255,255,.12) 0 1px,transparent 1px 5px);
+      mix-blend-mode:multiply;
     }
-
-    a:hover{
-      background:var(--ink);
-      color:var(--white);
-    }
-
-    img{
-      display:block;
-      max-width:100%;
-    }
-
-    .outer-frame{
-      width:min(1080px,94vw);
-      max-height:150vh;
-      background:var(--paper);
-      border:2px solid var(--ink);
-      border-radius:12px;
-      outline:2px dashed var(--ink);
-      outline-offset:7px;
-      padding:10px;
-      box-shadow:5px 5px 0 rgba(0,0,0,.12);
-    }
-
-    .inner-window{
+    a{color:inherit;text-decoration:none;border-bottom:1px dotted currentColor}
+    a:hover,button:hover{background:var(--ink);color:var(--paper)}
+    .site{
+      width:min(1180px,96vw);
+      background:rgba(247,247,241,.94);
       border:var(--line);
-      background:var(--white);
-      padding:6px;
+      border-radius:18px;
+      outline:4px dashed var(--ink);
+      outline-offset:10px;
+      padding:14px;
+      box-shadow:0 0 0 1px rgba(255,255,255,.9),10px 10px 0 rgba(0,0,0,.08);
     }
-
+    .topbar,.nav,.panel-title,.player,.feedback,.footer{
+      border:var(--line);
+      background:linear-gradient(#fafafa,#ecece8);
+    }
     .topbar{
-      height:30px;
-      display:grid;
-      grid-template-columns:1fr auto;
-      align-items:center;
-      border:var(--thin);
-      background:var(--gray);
-      padding:3px 8px;
-      font-size:16px;
-      font-weight:700;
-    }
-
-    .status-icons{
+      min-height:44px;
       display:flex;
       align-items:center;
-      gap:6px;
-      font-size:18px;
-      line-height:1;
+      justify-content:space-between;
+      gap:12px;
+      padding:7px 12px;
+      font-weight:900;
+      font-size:20px;
+      letter-spacing:-.04em;
     }
-
-    .status-icons i{
-      display:inline-block;
-      color:var(--ink);
-      filter:contrast(180%);
-    }
-
-    .time-login{
-      white-space:nowrap;
-      font-size:16px;
-    }
-
-    .navigation{
-      min-height:28px;
-      display:grid;
-      grid-template-columns:170px 1fr;
+    .icons{font-size:24px;letter-spacing:4px;white-space:nowrap}
+    .time{white-space:nowrap}
+    .nav{
+      border-top:0;
+      min-height:42px;
+      display:flex;
       align-items:center;
-      border-left:var(--thin);
-      border-right:var(--thin);
-      border-bottom:var(--thin);
-      background:var(--white);
-      font-size:16px;
-      font-weight:700;
+      justify-content:space-between;
+      gap:12px;
+      padding:7px 12px;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:-.03em;
     }
-
-    .navigation .label{
-      padding-left:8px;
-    }
-
-    .nav-links{
-      text-align:right;
-      padding-right:8px;
-      white-space:nowrap;
-    }
-
-    .nav-links a{
-      padding:0 1px;
-    }
-
-    .main-grid{
+    .links{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+    .layout{
       display:grid;
-      grid-template-columns:205px 1fr;
-      gap:6px;
-      margin-top:6px;
+      grid-template-columns:340px minmax(0,1fr);
+      gap:16px;
+      margin-top:12px;
     }
-
-    .left-col,
-    .right-col{
-      display:grid;
-      gap:6px;
-    }
-
-    .box{
-      border:var(--thin);
-      background:var(--white);
-      padding:6px;
-    }
-
-    .box-title{
-      font-weight:700;
-      font-size:14px;
-      margin-bottom:4px;
-    }
-
-    .tag-text{
-      border:1px solid var(--mid);
-      padding:5px;
-      min-height:70px;
-      font-size:14px;
-      line-height:1.08;
-      background:#fff;
-    }
-
-    .dni-button{
-      display:block;
-      margin-top:6px;
-      text-align:center;
-      padding:7px 2px;
-      background:var(--gray);
-      color:#777;
-      font-weight:700;
-      border:1px solid transparent;
-      font-size:14px;
-    }
-
-    .dni-button:hover{
-      background:var(--ink);
-      color:var(--white);
-    }
-
-    .pixel-card{
-      text-align:center;
-      font-size:14px;
-      line-height:1;
-      min-height:90px;
-      display:grid;
-      align-content:center;
-    }
-
-    .pixel-art{
-      font-size:28px;
-      line-height:.95;
-      letter-spacing:-1px;
-      margin:3px 0 6px;
-      white-space:pre;
-    }
-
-    .mini-line{
-      font-size:13px;
-      text-align:left;
-      margin-top:3px;
-    }
-
-    .now-small{
-      font-size:14px;
-      line-height:1.08;
-      min-height:94px;
-    }
-
-    .post{
-      border:var(--thin);
-      background:var(--white);
-      padding:6px;
-    }
-
-    .post-head{
+    .box{border:var(--line);background:var(--white)}
+    .panel-title{
+      border:0;
+      border-bottom:var(--line);
+      padding:7px 11px;
+      font-weight:900;
+      font-size:20px;
+      letter-spacing:-.04em;
       display:flex;
       justify-content:space-between;
-      gap:6px;
-      font-weight:700;
-      font-size:14px;
-      margin-bottom:4px;
-      white-space:nowrap;
-    }
-
-    .post-head span:first-child{
-      background:var(--gray);
-      padding:1px 4px;
-    }
-
-    .post p{
-      margin:0;
-      border:1px solid var(--mid);
-      padding:6px;
-      font-size:14px;
-      line-height:1.12;
-      background:#fff;
-    }
-
-    .post + .post{
-      margin-top:0;
-    }
-
-    .songbar{
-      margin-top:6px;
-      border:var(--thin);
-      background:var(--white);
-      display:grid;
-      grid-template-columns:auto 1fr auto 160px auto;
       align-items:center;
-      gap:7px;
-      padding:4px 7px;
-      font-size:14px;
-      white-space:nowrap;
+      gap:10px;
     }
-
-    .song-title{
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-
-    .play-button{
-      font-size:15px;
-      line-height:1;
-    }
-
-    .progress{
-      height:7px;
-      border:1px solid var(--ink);
-      background:
-        linear-gradient(90deg,var(--ink) 0 52%,transparent 52% 100%),
-        var(--gray);
+    .profile-img{
       position:relative;
-      min-width:120px;
-    }
-
-    .progress::after{
-      content:"";
-      width:9px;
-      height:9px;
-      background:var(--ink);
-      border-radius:50%;
-      position:absolute;
-      top:50%;
-      left:52%;
-      transform:translate(-50%,-50%);
-    }
-
-    .bottom-row{
-      margin-top:6px;
-      border:var(--thin);
-      background:var(--white);
-      display:grid;
-      grid-template-columns:230px 1fr;
-      align-items:center;
-      gap:8px;
-      padding:5px 7px;
-      font-size:14px;
-    }
-
-    .web-label{
-      white-space:nowrap;
+      height:285px;
       overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .social-feedback{
-      display:grid;
-      grid-template-columns:auto 1fr auto;
-      align-items:center;
-      gap:6px;
-    }
-
-    .social-icons{
-      display:flex;
-      align-items:center;
-      gap:5px;
-      white-space:nowrap;
-    }
-
-    .social-icons a{
-      width:18px;
-      height:18px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border:1px solid transparent;
-      font-size:14px;
-    }
-
-    .social-icons a:hover{
-      border:1px dashed var(--ink);
-      background:var(--gray);
-    }
-
-    .social-icons img{
-      width:14px;
-      height:14px;
-      filter:grayscale(1) contrast(200%);
-    }
-
-    .feedback-input{
-      height:24px;
-      border:var(--thin);
+      border-bottom:var(--line);
       background:#fff;
-      font-family:var(--mono);
-      font-size:13px;
-      padding:2px 5px;
+      isolation:isolate;
+    }
+    .profile-img img{
       width:100%;
-      min-width:100px;
+      height:100%;
+      object-fit:cover;
+      object-position:center 38%;
+      filter:grayscale(1) contrast(1.25) brightness(1.04);
     }
-
-    .send-btn{
-      height:24px;
-      border:var(--thin);
-      background:var(--gray);
-      font-family:var(--mono);
-      font-size:13px;
-      font-weight:700;
-      padding:0 8px;
-      cursor:pointer;
+    .profile-img:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle,#000 1.25px,transparent 1.7px) 0 0/8px 8px;
+      mix-blend-mode:multiply;
+      opacity:.96;
+      pointer-events:none;
+      z-index:2;
     }
-
-    .send-btn:hover{
-      background:var(--ink);
-      color:var(--white);
+    .profile-name{padding:12px 14px;text-align:center}
+    h1,h2,h3,p,ul{margin-top:0}
+    h1{font-size:28px;line-height:1;margin-bottom:5px;letter-spacing:-.08em}
+    h2{font-size:20px;margin:0;font-weight:900;letter-spacing:-.04em}
+    h3{font-size:18px;margin-bottom:6px}
+    p{margin-bottom:10px}
+    .muted{font-weight:900}
+    .place{font-size:18px}
+    .sidebox{margin-top:12px}
+    .interests{padding:12px 16px 10px}
+    .interests ul{list-style:none;padding:0;margin:0 0 9px}
+    .interests li:before{content:"■ ";font-weight:900}
+    .tiny-icons{display:flex;justify-content:space-around;font-size:26px;line-height:1;margin-top:6px}
+    .article+.article{margin-top:12px}
+    .article .body{padding:15px 22px 13px;font-size:20px;line-height:1.45;min-height:178px}
+    .article.project .body{min-height:236px}
+    .social{font-size:24px;letter-spacing:8px;white-space:nowrap}
+    .arrow-list{list-style:none;margin:0 0 18px;padding:0}
+    .arrow-list li{margin:5px 0}.arrow-list li:before{content:"▷ ";font-weight:900}
+    .player{
+      margin-top:12px;
+      min-height:46px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 430px 185px;
+      align-items:center;
+      overflow:hidden;
+      font-size:18px;
+      font-weight:900;
     }
-
-    @media(max-width:780px){
-      body{
-        overflow:auto;
-        padding:24px 10px;
-      }
-
-      .outer-frame{
-        width:94vw;
-        max-height:none;
-      }
-
-      .main-grid{
-        grid-template-columns:1fr;
-      }
-
-      .navigation{
-        grid-template-columns:1fr;
-        height:auto;
-        gap:2px;
-        padding:4px 0;
-      }
-
-      .navigation .label,
-      .nav-links{
-        text-align:left;
-        padding-left:8px;
-        padding-right:8px;
-        white-space:normal;
-      }
-
-      .bottom-row{
-        grid-template-columns:1fr;
-      }
+    .song{padding:10px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .controls{height:100%;border-left:var(--line);border-right:var(--line);display:flex;align-items:center;gap:10px;padding:8px 14px;background:#fff}
+    .play{font-size:25px;line-height:1}.slider{position:relative;flex:1;height:3px;background:#111}.slider:after{content:"";position:absolute;left:58%;top:50%;translate:-50% -50%;width:13px;height:13px;border-radius:50%;background:#111}.duration{white-space:nowrap;font-size:16px}
+    .spotify{height:100%;display:grid;place-items:center;padding:0 10px;background:#fdfdf7;border:0;font:inherit;font-weight:900;cursor:pointer;text-align:center}
+    .feedback{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns:260px 1fr 1fr 116px;
+      gap:0;
+      min-height:54px;
+      align-items:stretch;
+      font-size:18px;
+      font-weight:900;
     }
-
-    @media(max-width:560px){
-      .topbar{
-        grid-template-columns:1fr;
-        height:auto;
-        gap:4px;
-      }
-
-      .time-login{
-        font-size:13px;
-      }
-
-      .status-icons{
-        font-size:16px;
-      }
-
-      .songbar{
-        grid-template-columns:auto 1fr;
-      }
-
-      .progress,
-      .song-time{
-        display:none;
-      }
-
-      .social-feedback{
-        grid-template-columns:1fr;
-      }
+    .feedback label{display:flex;align-items:center;padding:8px 12px;border-right:var(--line);white-space:nowrap}.feedback .field{display:flex;align-items:center;gap:8px;padding:8px 12px;border-right:var(--line);background:#fff}.feedback input{width:100%;min-width:0;border:2px solid #999;background:#f9f9f9;font:inherit;padding:6px 8px}.feedback button{border:0;background:#f7f7f1;font:inherit;font-weight:900;cursor:pointer}
+    .footer{
+      margin-top:12px;border:0;background:transparent;text-align:center;font-size:17px;font-weight:900;display:flex;justify-content:space-between;gap:10px;padding:0 8px 2px}
+    .credit{white-space:nowrap}
+    @media(max-width:900px){
+      body{display:block;padding:22px 12px}.site{width:100%;outline-offset:5px;border-radius:10px}.layout{grid-template-columns:1fr}.player{grid-template-columns:1fr}.controls{border-left:0;border-right:0;border-top:var(--line);border-bottom:var(--line)}.feedback{grid-template-columns:1fr}.feedback label,.feedback .field{border-right:0;border-bottom:var(--line)}.footer{display:block}.article .body{font-size:16px}.topbar,.nav{font-size:16px}.icons{font-size:18px}.profile-img{height:320px}
     }
   </style>
 </head>
+<body>
+  <main class="site" id="home">
+    <header class="topbar">
+      <div class="icons" aria-hidden="true">✉ ● ◼ ☎ RSS</div>
+      <div class="time">Time : <span id="clock">4:44 AM</span> · <a href="#feedback">Login</a> | <a href="#feedback">Exit</a></div>
+    </header>
 
-<body id="top">
+    <nav class="nav" aria-label="Navegación principal">
+      <div>ナビゲーション：</div>
+      <div class="links">
+        <a href="#about">about</a> |
+        <a href="#projects">projects</a> |
+        <a href="#feedback">contact</a> |
+        <a href="https://github.com/pipelzm" target="_blank" rel="noreferrer">github</a> |
+        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">linkedin</a> |
+        <a href="https://orcid.org/" target="_blank" rel="noreferrer">orcid</a>
+      </div>
+    </nav>
 
-  <main class="outer-frame">
-    <section class="inner-window">
-
-      <header class="topbar">
-        <div class="status-icons" aria-label="status icons">
-          <i class="bi bi-envelope-fill" title="mail"></i>
-          <i class="bi bi-chat-left-fill" title="message"></i>
-          <i class="bi bi-telephone-fill" title="phone"></i>
-          <i class="bi bi-reception-4" title="signal"></i>
-          <i class="bi bi-wifi" title="wifi"></i>
-          <i class="bi bi-rss-fill" title="rss"></i>
-        </div>
-
-        <div class="time-login">
-          Time : <span id="clock">4:44 AM</span> ·
-          <a href="#feedback">Login</a> |
-          <a href="#top">Exit</a>
-        </div>
-      </header>
-
-      <nav class="navigation">
-        <div class="label">Navigation:</div>
-
-        <div class="nav-links">
-          <a href="#home">ホーム</a> |
-          <a href="#about">自己紹介</a> |
-          <a href="#projects">研究</a> |
-          <a href="#notes">ノート</a> |
-          <a href="#feedback">Feedback</a>
-        </div>
-      </nav>
-
-      <section class="main-grid">
-
-        <aside class="left-col">
-
-          <section class="box">
-            <div class="box-title">タグ :</div>
-
-            <div class="tag-text">
-              bioinformatics<br>
-              molecular docking<br>
-              cheminformatics<br>
-              日本語 notes
-            </div>
-
-            <a class="dni-button" href="#about">Extended Profile</a>
-          </section>
-
-          <section class="box pixel-card">
-            <div class="pixel-art">☁ {˶ᵔ ᵕ ᵔ˶} 彡</div>
-            <div class="mini-line">▷ v.01 / 2026</div>
-            <div class="mini-line">研究 · code · music</div>
-          </section>
-
-          <section class="box now-small">
-            <div class="box-title">Now Playing:</div>
-            Ironina - 煮ル果実<br>
-            “Aren't you and I<br>
-            both fiction?”
-          </section>
-
-        </aside>
-
-        <section class="right-col">
-
-          <article class="post" id="home">
-            <div class="post-head">
-              <span>はじめに!</span>
-              <span>Posted : 06:06 AM</span>
-            </div>
-
-            <p>
-              Welcome to my personal website. I’m Felipe Lizama, a biotechnologist
-              focused on bioinformatics, cheminformatics, molecular docking and
-              molecular dynamics. This page works like a tiny digital notebook for
-              research, code, music and quiet experiments ♡
-            </p>
-          </article>
-
-          <article class="post" id="about">
-            <div class="post-head">
-              <span>自己紹介!</span>
-              <span>Posted : 09:09 AM</span>
-            </div>
-
-            <p>
-              My current work explores protein-ligand systems using docking,
-              consensus ranking and MD simulations. I’m interested in scientific
-              software, data analysis, Japanese-inspired design and building small
-              tools for research workflows.
-            </p>
-          </article>
-
-          <article class="post" id="projects">
-            <div class="post-head">
-              <span>研究メモ!</span>
-              <span>Posted : 10:22 AM</span>
-            </div>
-
-            <p>
-              Projects include KRASG12D / 7RPZ screening, 1P0I / 4EY7 comparison,
-              ligand preparation, receptor cleaning, visual inspection and stability
-              analysis. Small steps, consistent logs, better science.
-            </p>
-          </article>
-
-        </section>
-      </section>
-
-      <section class="songbar">
-        <strong>Song Playing:</strong>
-        <span class="song-title">Ironina by Niru Kajitsu</span>
-        <span class="play-button">▷</span>
-        <div class="progress" aria-hidden="true"></div>
-        <span class="song-time">2:09 | 3:52</span>
-      </section>
-
-      <section class="bottom-row" id="feedback">
-        <div class="web-label">≡ @pipelzm's Website . . . ♡</div>
-
-        <form class="social-feedback" action="mailto:felipelzm02@gmail.com" method="post" enctype="text/plain">
-          <div class="social-icons" aria-label="social links">
-            <a href="mailto:felipelzm02@gmail.com" title="Email">
-              <i class="bi bi-envelope-fill"></i>
-            </a>
-
-            <a href="https://github.com/pipelzm" target="_blank" rel="noopener noreferrer" title="GitHub">
-              <img src="https://cdn.simpleicons.org/github/111111" alt="GitHub">
-            </a>
-
-            <a href="TU_LINK_DE_LINKEDIN" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-              <img src="https://cdn.simpleicons.org/linkedin/111111" alt="LinkedIn">
-            </a>
-
-            <a href="TU_LINK_DE_ORCID" target="_blank" rel="noopener noreferrer" title="ORCID">
-              <img src="https://cdn.simpleicons.org/orcid/111111" alt="ORCID">
-            </a>
-
-            <a href="TU_LINK_DE_GOOGLE_SCHOLAR" target="_blank" rel="noopener noreferrer" title="Google Scholar">
-              <img src="https://cdn.simpleicons.org/googlescholar/111111" alt="Google Scholar">
-            </a>
-
-            <a href="TU_LINK_DE_SPOTIFY" target="_blank" rel="noopener noreferrer" title="Spotify">
-              <img src="https://cdn.simpleicons.org/spotify/111111" alt="Spotify">
-            </a>
+    <section class="layout">
+      <aside class="sidebar">
+        <section class="box">
+          <div class="panel-title">✿ プロフィール ✿</div>
+          <div class="profile-img"><img src="assets/icon.png" alt="Felipe Lizama-Mora icon" /></div>
+          <div class="profile-name">
+            <h1>Felipe Lizama-Mora</h1>
+            <div class="muted">研究者・バイオテクノロジー</div>
+            <div class="place">● Lautaro, CL</div>
           </div>
+        </section>
 
-          <input class="feedback-input" type="text" name="feedback" placeholder="Feedback...">
-          <button class="send-btn" type="submit">Send</button>
-        </form>
+        <section class="box sidebox">
+          <div class="panel-title">興味・関心</div>
+          <div class="interests">
+            <ul>
+              <li>bioinformatics</li>
+              <li>biotechnology</li>
+              <li>日本 / Japan</li>
+              <li>data science</li>
+            </ul>
+            <div class="tiny-icons" aria-hidden="true"><span>♙</span><span>▣</span><span>▥</span><span>♧</span></div>
+          </div>
+        </section>
+      </aside>
+
+      <section class="content">
+        <article class="box article" id="about">
+          <div class="panel-title"><span>自己紹介・ようこそ！</span><span>投稿日：06:06 AM</span></div>
+          <div class="body">
+            <p>こんにちは！ Felipe Lizama-Mora です。</p>
+            <p>バイオテクノロジーとデータサイエンスの交差点にいる研究者です。コードを書いたり、データを解析したり、新しい技術を学んだりするのが好きです。</p>
+            <p>このサイトは、私のプロジェクト、メモ、そして興味を共有するための小さな場所です。</p>
+            <p>よろしくお願いします！ 研究・技術・未来に向けて ✤</p>
+          </div>
+        </article>
+
+        <article class="box article project" id="projects">
+          <div class="panel-title"><span>プロジェクト・連絡</span><span class="social">✉ ● in iD</span></div>
+          <div class="body">
+            <p>現在取り組んでいること：</p>
+            <ul class="arrow-list">
+              <li>ゲノムデータ解析パイプラインの開発</li>
+              <li>バイオインフォマティクスツールの作成と自動化</li>
+              <li>オープンサイエンス &amp; 再現可能な研究の推進</li>
+              <li>molecular docking / MD / cheminformatics</li>
+            </ul>
+            <p>ご連絡・コラボレーションはいつでも歓迎です！</p>
+            <p>メールまたは各種リンクからお気軽にどうぞ。どうぞ〜 ^_^</p>
+          </div>
+        </article>
       </section>
-
     </section>
+
+    <section class="player" aria-label="Spotify music player">
+      <div class="song">音楽・再生中：Lamp - 夜の静けさ (Yoru no Shizukesa)</div>
+      <div class="controls" aria-hidden="true"><span class="play">▷</span><span class="slider"></span><span>♫</span><span class="duration">2:09 | 4:47</span></div>
+      <button class="spotify" id="spotifyBtn" type="button">● Open in Spotify</button>
+    </section>
+
+    <form class="feedback" id="feedback">
+      <label for="fbName">✎ フィードバック・連絡</label>
+      <div class="field"><span>Feedback:</span><input id="fbName" name="name" placeholder="Your name..." /></div>
+      <div class="field"><span>Message:</span><input id="fbMsg" name="message" placeholder="Say something!" /></div>
+      <button type="submit">送信 ✉</button>
+    </form>
+
+    <footer class="footer">
+      <span>✿ 未来をデザインし、データで理解する。✿</span>
+      <span class="credit">© 2026 pipelzm.github.io</span>
+    </footer>
   </main>
 
   <script>
+    const SPOTIFY_URL = "https://open.spotify.com/search/Lamp%20%E5%A4%9C%E3%81%AE%E9%9D%99%E3%81%91%E3%81%95";
+
     function updateClock(){
-      const clock = document.getElementById("clock");
       const now = new Date();
-
-      clock.textContent = now.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true
-      });
+      document.getElementById("clock").textContent = now.toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
     }
-
     updateClock();
-    setInterval(updateClock, 1000);
-  </script>
+    setInterval(updateClock, 30000);
 
+    document.getElementById("spotifyBtn").addEventListener("click", () => {
+      window.open(SPOTIFY_URL, "_blank", "noopener,noreferrer");
+    });
+
+    document.getElementById("feedback").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = document.getElementById("fbName").value.trim() || "anonymous";
+      const msg = document.getElementById("fbMsg").value.trim() || "Sin mensaje";
+      const subject = encodeURIComponent("Feedback para pipelzm.github.io");
+      const body = encodeURIComponent(`Nombre: ${name}\n\nMensaje:\n${msg}`);
+      location.href = `mailto:felipelzm02@gmail.com?subject=${subject}&body=${body}`;
+    });
+  </script>
 </body>
 </html>
