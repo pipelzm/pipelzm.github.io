@@ -178,3 +178,31 @@
     setupMobileNav();
   });
 })();
+
+/* Pipelzm live datetime patch */
+(function () {
+  function updateLiveDateTime() {
+    const el = document.getElementById("live-time");
+    if (!el) return;
+
+    const now = new Date();
+
+    const date = new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric"
+    }).format(now);
+
+    const time = new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true
+    }).format(now);
+
+    el.textContent = `Date : ${date} · Time : ${time}`;
+  }
+
+  updateLiveDateTime();
+  setInterval(updateLiveDateTime, 1000);
+})();
