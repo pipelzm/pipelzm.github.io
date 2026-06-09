@@ -1,187 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@pipelzm — ホーム</title>
-  <meta name="description" content="Felipe Lizama-Mora — bioinformatics, molecular docking, cheminformatics. A tiny digital notebook." />
-  <link rel="stylesheet" href="main/assets/styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#d9d9d4" />
+  <meta name="description" content="Felipe Lizama-Mora personal website: bioinformatics, cheminformatics, molecular docking and molecular dynamics." />
+  <title>Felipe Lizama-Mora · Home</title>
+  <link rel="stylesheet" href="main/assets/css/styles.css" />
 </head>
-<body>
+<body data-page="home">
+  <div class="page-wrap">
+    <main class="outer-frame" aria-label="Retro personal website interface">
+      <div class="inner-frame">
+        <header>
+          <div class="top-strip">
+            <div class="os-icons" aria-hidden="true">
+              <span class="icon-box icon-mail"></span>
+              <span class="icon-box icon-chat"></span>
+              <span class="icon-box icon-phone"></span>
+              <span class="icon-box icon-bars"><i></i><i></i><i></i><i></i></span>
+              <span class="icon-box icon-wifi"><i></i></span>
+              <span class="icon-box icon-rss"><i></i></span>
+            </div>
+            <div class="login-time">Time : <span id="live-time">--:--</span> · Login | Exit</div>
+          </div>
 
-  <!-- ===== Inline SVG icon sprite (monochrome line-art) ===== -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 6h18v12H3z"/><path fill="none" stroke="currentColor" stroke-width="2" d="M3 7l9 6 9-6"/></symbol>
-      <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M4 5h16v10H9l-4 4V15H4z"/></symbol>
-      <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 3h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 4 5 2 2 0 0 1 6 3z"/></symbol>
-      <symbol id="i-signal" viewBox="0 0 24 24"><rect x="3" y="14" width="3" height="6" fill="currentColor"/><rect x="8" y="10" width="3" height="10" fill="currentColor"/><rect x="13" y="6" width="3" height="14" fill="currentColor"/><rect x="18" y="3" width="3" height="17" fill="currentColor"/></symbol>
-      <symbol id="i-wifi" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M2 8a16 16 0 0 1 20 0M5 12a11 11 0 0 1 14 0M8 16a6 6 0 0 1 8 0"/><circle cx="12" cy="19" r="1.4" fill="currentColor"/></symbol>
-      <symbol id="i-rss" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="2" d="M4 11a9 9 0 0 1 9 9M4 5a15 15 0 0 1 15 15"/></symbol>
-      <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 9 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.4-2.2-.300000000000001-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></symbol>
-      <symbol id="i-orcid" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><circle cx="8" cy="7" r="1.4" fill="#fff"/><rect x="7" y="9.5" width="2" height="8" fill="#fff"/><path fill="#fff" d="M11 9.5h4a4 4 0 0 1 0 8h-4zm2 2v4h2a2 2 0 0 0 0-4z"/></symbol>
-      <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3" fill="currentColor"/><rect x="5" y="9" width="3" height="9" fill="#fff"/><circle cx="6.5" cy="6" r="1.6" fill="#fff"/><path fill="#fff" d="M11 9h3v1.3c.5-.8 1.5-1.5 3-1.5 2.5 0 3 1.6 3 4V18h-3v-4.5c0-1.1-.4-1.8-1.4-1.8s-1.6.7-1.6 1.8V18h-3z"/></symbol>
-      <symbol id="i-heart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 20s-7-4.5-7-9.5A3.5 3.5 0 0 1 12 7a3.5 3.5 0 0 1 7 3.5C19 15.5 12 20 12 20z"/></symbol>
-    </defs>
-  </svg>
+          <div class="nav-bar">
+            <div class="nav-title">Navigation:</div>
+            <button id="nav-toggle" class="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false">menu</button>
+            <nav id="main-nav" class="nav-menu" aria-label="Main navigation">
+              <a class="nav-link" data-page="home" href="index.html">ホーム</a><span class="sep">|</span>
+              <a class="nav-link" data-page="about" href="about.html">自己紹介</a><span class="sep">|</span>
+              <a class="nav-link" data-page="projects" href="projects.html">研究</a><span class="sep">|</span>
+              <a class="nav-link" data-page="resume" href="resume.html">履歴書</a><span class="sep">|</span>
+              <a class="nav-link" data-page="contact" href="contact.html">連絡</a>
+            </nav>
+          </div>
+        </header>
 
-  <div class="frame">
-    <div class="window">
+        <div class="main-grid">
+          <aside class="sidebar" aria-label="Sidebar">
+            <section class="pixel-card tag-card">
+              <h2>タグ：</h2>
+              <div class="tag-box">
+                bioinformatics<br />
+                molecular docking<br />
+                cheminformatics<br />
+                日本語 notes
+              </div>
+              <a class="extended-button" href="about.html">Extended Profile</a>
+            </section>
 
-      <!-- ===== Top status bar ===== -->
-      <div class="topbar">
-        <div class="sys-icons">
-          <svg width="20" height="20"><use href="#i-mail"/></svg>
-          <svg width="20" height="20"><use href="#i-chat"/></svg>
-          <svg width="20" height="20"><use href="#i-phone"/></svg>
-          <svg width="20" height="20"><use href="#i-signal"/></svg>
-          <svg width="20" height="20"><use href="#i-wifi"/></svg>
-          <svg width="20" height="20"><use href="#i-rss"/></svg>
+            <section class="pixel-card repo-card" aria-live="polite">
+              <div class="repo-header">
+                <h3>GitHub:</h3>
+                <span id="repo-status" class="repo-status">loading...</span>
+              </div>
+              <div id="repo-list" class="repo-list">
+                <p class="mini-muted">Loading repositories...</p>
+              </div>
+            </section>
+
+            <section class="pixel-card world-card">
+              <h3>Now Playing:</h3>
+              <p class="note-line">world clock · mini map</p>
+              <div id="world-map" class="world-map"></div>
+              <ul id="world-clock-list" class="world-clock-list"></ul>
+            </section>
+          </aside>
+
+          <section class="content-area" aria-label="Home content">
+            <article class="article-card">
+              <div class="article-head">
+                <h1>はじめに!</h1>
+                <span class="article-time">Posted : 06:06 AM</span>
+              </div>
+              <div class="article-body">
+                <p>Welcome to my personal website. I’m Felipe Lizama-Mora, a biotechnologist focused on bioinformatics, cheminformatics, molecular docking and molecular dynamics. This page works like a tiny digital notebook for research, code, music and quiet experiments ♡</p>
+              </div>
+            </article>
+
+            <article class="article-card">
+              <div class="article-head">
+                <h2>自己紹介!</h2>
+                <span class="article-time">Posted : 09:09 AM</span>
+              </div>
+              <div class="article-body">
+                <p>My current work explores protein-ligand systems using docking, consensus ranking and MD simulations. I’m interested in scientific software, data analysis, Japanese-inspired design and building small tools for research workflows.</p>
+              </div>
+            </article>
+
+            <article class="article-card">
+              <div class="article-head">
+                <h2>研究メモ!</h2>
+                <span class="article-time">Posted : 10:22 AM</span>
+              </div>
+              <div class="article-body">
+                <p>Projects include KRASG12D / 7RPZ screening, 1P0I / 4EY7 comparison, ligand preparation, receptor cleaning, visual inspection and stability analysis. Small steps, consistent logs, better science.</p>
+              </div>
+            </article>
+          </section>
         </div>
-        <div class="sys-right">
-          Time : <span data-clock>5:38 PM</span>
-          <span class="sep">·</span>
-          <a href="extended.html">Login</a> | <a href="#" onclick="return false">Exit</a>
-        </div>
-      </div>
 
-      <!-- ===== Navigation (Feedback removed) ===== -->
-      <nav class="nav">
-        <span class="nav-label">Navigation:</span>
-        <span class="nav-links">
-          <a href="index.html" class="active">ホーム</a><span class="bar">|</span>
-          <a href="about.html">自己紹介</a><span class="bar">|</span>
-          <a href="research.html">研究</a><span class="bar">|</span>
-          <a href="notes.html">ノート</a>
-        </span>
-      </nav>
+        <section class="spotify-row" aria-label="Spotify widget">
+          <div class="spotify-label">Spotify: <span id="spotify-track-label">loading...</span></div>
+          <div id="spotify-frame-wrap" class="spotify-frame-wrap"></div>
+        </section>
 
-      <!-- ===== Body ===== -->
-      <div class="body">
-
-        <!-- ----- Sidebar ----- -->
-        <aside class="sidebar">
-
-          <!-- Tags + Extended profile button -->
-          <div class="box tags">
-            <div class="box-pad">
-              <div class="box-title">タグ：</div>
-            </div>
-            <ul class="tag-list">
-              <li>bioinformatics</li>
-              <li>molecular docking</li>
-              <li>cheminformatics</li>
-              <li>日本語 notes</li>
-            </ul>
-            <a class="btn-ext" href="extended.html">Extended Profile</a>
+        <footer class="site-footer">
+          <div class="footer-brand"><strong>© 2026 Felipe Lizama-Mora</strong><span>| powered by GitHub Pages &amp; RAVEN</span></div>
+          <div class="footer-socials" aria-label="Social links">
+            <a class="social-icon" data-social="email" href="mailto:felipelzm02@gmail.com" aria-label="Email">✉</a>
+            <a class="social-icon" data-social="github" href="https://github.com/pipelzm" aria-label="GitHub">GH</a>
+            <a class="social-icon" data-social="linkedin" href="https://www.linkedin.com/" aria-label="LinkedIn">in</a>
+            <a class="social-icon" data-social="orcid" href="https://orcid.org/" aria-label="ORCID">iD</a>
+            <a class="social-icon" data-social="home" href="https://pipelzm.github.io" aria-label="Home">⌂</a>
           </div>
-
-          <!-- GitHub repositories (replaces happy face) -->
-          <div class="box box-pad worldless">
-            <div class="repos-head">
-              <span class="box-title" style="margin:0">GitHub repos</span>
-              <span class="gh-logo"><svg width="18" height="18"><use href="#i-github"/></svg></span>
-            </div>
-            <ul class="repo-list" data-repos>
-              <li class="repos-loading">Loading repos…</li>
-            </ul>
-          </div>
-
-          <!-- World clock + mini map (replaces now playing text) -->
-          <div class="box box-pad worldclock">
-            <div class="box-title">Now Playing: World Times</div>
-            <div class="map-wrap">
-              <svg class="worldmap" viewBox="0 0 100 56" preserveAspectRatio="xMidYMid meet" role="img" aria-label="World map">
-                <!-- simplified landmasses -->
-                <g fill="#cfcfcf" stroke="#9a9a9a" stroke-width="0.4">
-                  <path d="M10,14 L26,11 L31,16 L28,22 L22,24 L14,22 L9,18 Z"/>
-                  <path d="M24,26 L31,25 L33,33 L30,44 L26,48 L24,40 L23,32 Z"/>
-                  <path d="M44,12 L54,11 L52,16 L47,17 L44,15 Z"/>
-                  <path d="M46,18 L55,18 L57,28 L52,40 L48,34 L46,26 Z"/>
-                  <path d="M58,10 L86,9 L92,16 L88,22 L78,24 L66,22 L60,16 Z"/>
-                  <path d="M82,40 L92,39 L94,45 L88,47 L83,45 Z"/>
-                </g>
-                <g data-dots></g>
-              </svg>
-            </div>
-            <ul class="clock-list" data-clocklist>
-              <li><span class="city">Santiago</span><span class="time">--:--</span></li>
-            </ul>
-          </div>
-
-        </aside>
-
-        <!-- ----- Main content ----- -->
-        <main class="main">
-
-          <article class="post">
-            <div class="post-head"><span>はじめに!</span><span class="posted">Posted : 06:06 AM</span></div>
-            <div class="post-body">
-              <p>Welcome to my personal website. I'm Felipe Lizama, a biotechnologist
-              focused on bioinformatics, cheminformatics, molecular docking and molecular
-              dynamics. This page works like a tiny digital notebook for research, code,
-              music and quiet experiments <svg width="14" height="14" style="vertical-align:-1px"><use href="#i-heart"/></svg></p>
-            </div>
-          </article>
-
-          <article class="post">
-            <div class="post-head"><span>自己紹介!</span><span class="posted">Posted : 09:09 AM</span></div>
-            <div class="post-body">
-              <p>My current work explores protein-ligand systems using docking, consensus
-              ranking and MD simulations. I'm interested in scientific software, data
-              analysis, Japanese-inspired design and building small tools for research
-              workflows. <a href="about.html">More about me →</a></p>
-            </div>
-          </article>
-
-          <article class="post">
-            <div class="post-head"><span>研究メモ!</span><span class="posted">Posted : 10:22 AM</span></div>
-            <div class="post-body">
-              <p>Projects include KRASG12D / 7RPZ screening, 1P0I / 4EY7 comparison, ligand
-              preparation, receptor cleaning, visual inspection and stability analysis.
-              Small steps, consistent logs, better science. <a href="research.html">See research →</a></p>
-            </div>
-          </article>
-
-        </main>
+          <form id="quick-feedback-form" class="quick-feedback">
+            <input id="quick-feedback-input" type="text" maxlength="220" placeholder="Quick feedback..." aria-label="Quick feedback" />
+            <button type="submit">Send</button>
+          </form>
+        </footer>
       </div>
-
-      <!-- ===== Spotify section (replaces song playing) ===== -->
-      <div class="spotify-bar">
-        <div class="sp-label">Song Playing — latest track on Spotify</div>
-        <!-- Replace the embed src with your track/playlist. See README. -->
-        <iframe
-          title="Spotify"
-          style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/3n3Ppam7vgaVa1iaRUc9Lp?utm_source=generator&theme=0"
-          height="152"
-          frameborder="0"
-          allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"></iframe>
-      </div>
-
-      <!-- ===== Bottom bar (footer) ===== -->
-      <footer class="bottombar">
-        <span class="credit">
-          <svg width="14" height="14" style="vertical-align:-2px"><use href="#i-heart"/></svg>
-          © 2026 Felipe Lizama-Mora | powered by GitHub Pages &amp; RAVEN
-        </span>
-        <span class="socials">
-          <a data-mailto href="#" title="Email"><svg width="18" height="18"><use href="#i-mail"/></svg></a>
-          <a href="https://github.com/pipelzm" target="_blank" rel="noopener" title="GitHub"><svg width="18" height="18"><use href="#i-github"/></svg></a>
-          <a href="https://orcid.org/" target="_blank" rel="noopener" title="ORCID"><svg width="18" height="18"><use href="#i-orcid"/></svg></a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" title="LinkedIn"><svg width="18" height="18"><use href="#i-linkedin"/></svg></a>
-        </span>
-        <form class="quickfb">
-          <input type="text" placeholder="Quick feedback…" aria-label="Quick feedback" />
-          <button type="submit">Send</button>
-        </form>
-      </footer>
-
-    </div>
+    </main>
   </div>
 
-  <script src="site.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
