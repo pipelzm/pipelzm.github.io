@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#d9d9d4" />
-  <meta name="description" content="Resume of Felipe Lizama-Mora." />
+  <meta name="description" content="Online resume of Felipe Lizama-Mora: biotechnology, bioinformatics, cheminformatics, molecular docking and molecular dynamics." />
   <title>Felipe Lizama-Mora · Resume</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260609b" />
 </head>
 <body data-page="resume">
   <div class="page-wrap">
@@ -37,12 +37,23 @@
           </div>
         </header>
 
-        <div class="main-grid">
-          <aside class="sidebar">
+        <div class="main-grid resume-grid">
+          <aside class="sidebar resume-sidebar">
             <section class="pixel-card tag-card">
               <h2>タグ：</h2>
-              <div class="tag-box">resume<br />skills<br />bioinformatics<br />workflow</div>
-              <a class="extended-button" href="contact.html">Contact</a>
+              <div class="tag-box">cv<br />bioinformatics<br />cheminformatics<br />molecular dynamics</div>
+              <a class="extended-button" href="#about-cv">Open Resume</a>
+            </section>
+
+            <section class="pixel-card cv-side-nav">
+              <h3>CV Index:</h3>
+              <a href="#experience">Experience</a>
+              <a href="#projects-cv">Projects</a>
+              <a href="#awards">Awards</a>
+              <a href="#education">Education</a>
+              <a href="#skills">Skills</a>
+              <a href="#teaching">Teaching</a>
+              <a href="#languages">Languages</a>
             </section>
 
             <section class="pixel-card repo-card" aria-live="polite">
@@ -63,38 +74,240 @@
           </aside>
 
           <section class="content-area" aria-label="resume content">
-            <article class="article-card">
+            <article class="article-card resume-card">
               <div class="article-head">
-                <h1>履歴書!</h1>
-                <span class="article-time">Posted : 08:44 AM</span>
+                <h1>履歴書 / Resume</h1>
+                <span class="article-time">Updated : 2026</span>
               </div>
-              <div class="article-body">
-                <p>Biotechnologist focused on computational research workflows, molecular modelling, bioinformatics and cheminformatics. This page can be used as a lightweight online CV.</p>
-              </div>
-            </article>
 
-            <article class="article-card">
-              <div class="article-head">
-                <h2>Skills!</h2>
-                <span class="article-time">Posted : 10:01 AM</span>
-              </div>
-              <div class="article-body">
-                <table class="mini-table"><tr><th>Area</th><th>Tools / Topics</th></tr><tr><td>Programming</td><td>Python, R, shell scripting, data tables, automation.</td></tr><tr><td>Modelling</td><td>Docking, ligand preparation, receptor cleaning, MD setup.</td></tr><tr><td>Analysis</td><td>RMSD, RMSF, distances, ranking, consensus scores, plotting.</td></tr><tr><td>Design</td><td>Personal web interfaces, retro layouts, Japanese-inspired visuals.</td></tr></table>
-              </div>
-            </article>
+              <div class="article-body resume-body">
+                <section id="about-cv" class="cv-hero">
+                  <p class="cv-prompt">@cv:~$ whoami</p>
+                  <h2>Felipe Lizama Mora</h2>
+                  <p class="cv-subtitle">Biotechnology · Bioinformatics · Cheminformatics · Molecular Docking · Molecular Dynamics</p>
 
-            <article class="article-card">
-              <div class="article-head">
-                <h2>Experience Notes!</h2>
-                <span class="article-time">Posted : 01:25 PM</span>
-              </div>
-              <div class="article-body">
-                <ul>
-                  <li>Docking workflows with Vina, smina and GNINA.</li>
-                  <li>Ligand and receptor preparation using OpenBabel, RDKit and related utilities.</li>
-                  <li>MD workflows in GROMACS with structured logs and reproducible folders.</li>
-                  <li>Scientific writing, documentation and research summaries.</li>
-                </ul>
+                  <div class="cv-meta-grid" aria-label="contact and profile information">
+                    <span>Temuco, Chile</span>
+                    <a href="mailto:felipelzm02@gmail.com">felipelzm02@gmail.com</a>
+                    <a href="https://github.com/pipelzm" target="_blank" rel="noopener">github.com/pipelzm</a>
+                    <span>LinkedIn: Felipe Lizama Mora</span>
+                  </div>
+
+                  <p class="cv-summary">
+                    Biotechnology student at Universidad de La Frontera with a research profile focused on computational workflows for molecular systems. My current work connects ligand preparation, receptor cleaning, molecular docking, consensus ranking and molecular dynamics simulations with reproducible documentation and data analysis.
+                  </p>
+
+                  <div class="cv-actions">
+                    <a class="cv-action" href="#experience">Read online CV</a>
+                    <a class="cv-action" href="#" onclick="window.print(); return false;">Print / save as PDF</a>
+                    <a class="cv-action" href="mailto:felipelzm02@gmail.com?subject=CV%20request%20-%20Felipe%20Lizama%20Mora">Request PDF</a>
+                  </div>
+                </section>
+
+                <nav class="cv-jumpbar" aria-label="Resume sections">
+                  <a href="#experience">About</a>
+                  <a href="#experience">Experience</a>
+                  <a href="#projects-cv">Projects</a>
+                  <a href="#awards">Awards</a>
+                  <a href="#education">Education</a>
+                  <a href="#skills">Skills</a>
+                  <a href="#teaching">Teaching</a>
+                  <a href="#languages">Interests</a>
+                </nav>
+
+                <section id="experience" class="cv-section">
+                  <h2 class="cv-section-title">Experience</h2>
+
+                  <div class="cv-entry">
+                    <div class="cv-date">2026 – 2027</div>
+                    <div class="cv-info">
+                      <h3>Scientific Research · Medicinal Organic Chemistry Laboratory</h3>
+                      <p class="cv-org">Universidad de La Frontera · FONDECYT Regular, Dr. Alejandro Castro Alvarez</p>
+                      <ul>
+                        <li>Molecular modelling of KRAS G12-associated proteins to identify synthetic compounds with potential anticancer relevance.</li>
+                        <li>Protein-ligand interaction analysis using docking, comparative ranking and molecular simulation workflows.</li>
+                        <li>Preparation of reproducible logs and computational folders for screening, inspection and MD follow-up.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="cv-entry">
+                    <div class="cv-date">2025 – 2026</div>
+                    <div class="cv-info">
+                      <h3>Teaching Assistant · Bioinformatics IMA354-1</h3>
+                      <p class="cv-org">Universidad de La Frontera</p>
+                      <ul>
+                        <li>Practical classroom support and theoretical teaching sessions for bioinformatics activities.</li>
+                        <li>Student guidance in computational thinking, biological data interpretation and practical workflow execution.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="cv-entry">
+                    <div class="cv-date">2025</div>
+                    <div class="cv-info">
+                      <h3>Science Outreach Monitor · Programa INICIA</h3>
+                      <p class="cv-org">Academia Biotecnología · Universidad de La Frontera</p>
+                      <ul>
+                        <li>Teaching and outreach activities to promote scientific curiosity among children and teenagers.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="cv-entry">
+                    <div class="cv-date">2024 – 2025</div>
+                    <div class="cv-info">
+                      <h3>Scientific Research · Biocontrol and Medicinal Organic Chemistry Laboratories</h3>
+                      <p class="cv-org">Universidad de La Frontera</p>
+                      <ul>
+                        <li>Assistance in synthesis and analysis of organic compounds.</li>
+                        <li>Use of biochemical characterization and differentiation techniques.</li>
+                        <li>Molecular modelling and interaction analysis of KRAS G12-related protein systems.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="cv-entry">
+                    <div class="cv-date">2023</div>
+                    <div class="cv-info">
+                      <h3>Centro Experimental Maquehue · BIOGAS-MAQ</h3>
+                      <p class="cv-org">Universidad de La Frontera</p>
+                      <ul>
+                        <li>Development of proposals for using biogas from livestock waste as a sustainable energy source.</li>
+                        <li>Project work focused on reducing carbon footprint through circular use of organic residues.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="cv-entry">
+                    <div class="cv-date">2022</div>
+                    <div class="cv-info">
+                      <h3>Scientific Research · Biomedical and Translational Research Laboratory</h3>
+                      <p class="cv-org">Universidad de La Frontera</p>
+                      <ul>
+                        <li>Generation of protein models and molecular interaction analyses.</li>
+                        <li>Processing of biological samples in a clinical-experimental context.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="projects-cv" class="cv-section">
+                  <h2 class="cv-section-title">Projects</h2>
+
+                  <div class="cv-project">
+                    <h3>KRASG12D / 7RPZ virtual screening and molecular dynamics</h3>
+                    <p>Computational pipeline for receptor preparation, ligand processing, docking with Vina/smina/GNINA, consensus ranking, visual inspection and MD follow-up at 310 K.</p>
+                    <div class="cv-tags"><span>Docking</span><span>GROMACS</span><span>KRASG12D</span><span>Python</span></div>
+                  </div>
+
+                  <div class="cv-project">
+                    <h3>1P0I / 4EY7 comparative screening workflow</h3>
+                    <p>Comparative analysis between docking results, consensus ranking and pilot MD stability checks for protein-ligand systems.</p>
+                    <div class="cv-tags"><span>Consensus ranking</span><span>MD</span><span>Cheminformatics</span></div>
+                  </div>
+
+                  <div class="cv-project">
+                    <h3>IMPACTO3R Temuco</h3>
+                    <p>Community recycling and cleaning project in Villa Alonso Ercilla, Temuco, supporting more than 50 older adults in waste management.</p>
+                    <div class="cv-tags"><span>Innovation</span><span>Community</span><span>Sustainability</span></div>
+                  </div>
+                </section>
+
+                <section id="awards" class="cv-section">
+                  <h2 class="cv-section-title">Honours & Awards</h2>
+                  <ul class="cv-awards">
+                    <li><strong>2025</strong> · Winner, 2nd National Manga Contest Against Gender Violence, category “Best Technique” · Government of Chile / Ministry of Women / Embassy of Japan / Pontificia Universidad Católica de Chile.</li>
+                    <li><strong>2024</strong> · “My University Life in 100 Words” award · UFRO-UCT.</li>
+                    <li><strong>2024</strong> · Winning project, “Involúcrate” · IMPACTO3R Temuco.</li>
+                    <li><strong>2020</strong> · “Norton Flores” award · Liceo Jorge Teillier Sandoval.</li>
+                    <li><strong>2020</strong> · Academic Excellence · Liceo Jorge Teillier Sandoval.</li>
+                  </ul>
+                </section>
+
+                <section id="education" class="cv-section">
+                  <h2 class="cv-section-title">Education</h2>
+
+                  <div class="cv-entry">
+                    <div class="cv-date">2021 – 2026</div>
+                    <div class="cv-info">
+                      <h3>Biotechnology · Universidad de La Frontera</h3>
+                      <p class="cv-org">Temuco, Chile</p>
+                      <ul>
+                        <li>Expected professional degree: 2026.</li>
+                        <li>Bachelor degree in Biotechnology: 2025.</li>
+                        <li>Academic focus: molecular modelling, bioinformatics, scientific computing and biotechnology research.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="cv-entry">
+                    <div class="cv-date">2017 – 2020</div>
+                    <div class="cv-info">
+                      <h3>Secondary Education · Liceo Jorge Teillier Sandoval H.C.</h3>
+                      <p class="cv-org">Chile</p>
+                      <ul>
+                        <li>Secondary education degree obtained in 2020.</li>
+                        <li>Recognition for academic excellence and institutional distinction.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="skills" class="cv-section">
+                  <h2 class="cv-section-title">Skills</h2>
+
+                  <div class="skill-grid">
+                    <div class="skill-block">
+                      <h3>Computational science</h3>
+                      <p>Bioinformatics, cheminformatics, molecular modelling, docking, receptor preparation, ligand preparation, molecular dynamics and stability analysis.</p>
+                    </div>
+                    <div class="skill-block">
+                      <h3>Programming & data</h3>
+                      <p>Python, SQL, HTML, Excel, basic/intermediate BI workflows, structured data tables, plotting and automation scripts.</p>
+                    </div>
+                    <div class="skill-block">
+                      <h3>Scientific tools</h3>
+                      <p>GROMACS, AutoDock Vina, smina, GNINA, OpenBabel, RDKit, QGIS, command-line workflows and reproducible documentation.</p>
+                    </div>
+                    <div class="skill-block">
+                      <h3>Interpersonal skills</h3>
+                      <p>Leadership, multicultural teamwork, effective communication, responsibility, adaptability, active sociability and critical thinking.</p>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="teaching" class="cv-section">
+                  <h2 class="cv-section-title">Teaching & Outreach</h2>
+
+                  <div class="cv-entry compact-entry">
+                    <div class="cv-date">2025 – 2026</div>
+                    <div class="cv-info">
+                      <h3>Bioinformatics teaching assistant</h3>
+                      <p>Practical and theoretical support for university-level bioinformatics sessions.</p>
+                    </div>
+                  </div>
+
+                  <div class="cv-entry compact-entry">
+                    <div class="cv-date">2025</div>
+                    <div class="cv-info">
+                      <h3>Science outreach monitor</h3>
+                      <p>Activities designed to introduce biotechnology and scientific curiosity to young students.</p>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="languages" class="cv-section">
+                  <h2 class="cv-section-title">Languages & Interests</h2>
+
+                  <div class="language-row">
+                    <span><strong>Spanish</strong> · Native</span>
+                    <span><strong>English</strong> · Intermediate / Advanced</span>
+                    <span><strong>Japanese</strong> · Basic</span>
+                  </div>
+
+                  <p class="cv-interests">Scientific software, Japanese-inspired design, molecular simulation, data analysis, open research workflows, manga culture, music and personal web interfaces.</p>
+                </section>
               </div>
             </article>
           </section>
@@ -124,6 +337,6 @@
   </div>
 
   <script src="assets/js/config.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js?v=20260609b"></script>
 </body>
 </html>

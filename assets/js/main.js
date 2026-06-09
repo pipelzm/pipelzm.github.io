@@ -4,19 +4,27 @@
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
-  function formatTopTime(date = new Date()) {
-    return new Intl.DateTimeFormat('en-US', {
+  function formatTopDateTime(date = new Date()) {
+    const dateText = new Intl.DateTimeFormat('en-US', {
+      month: 'short',
+      day: '2-digit',
+      year: 'numeric'
+    }).format(date);
+
+    const timeText = new Intl.DateTimeFormat('en-US', {
       hour: 'numeric',
       minute: '2-digit',
       second: '2-digit',
       hour12: true
     }).format(date);
+
+    return `Date : ${dateText} · Time : ${timeText}`;
   }
 
   function startTopClock() {
     const el = $('#live-time');
     if (!el) return;
-    const update = () => { el.textContent = formatTopTime(); };
+    const update = () => { el.textContent = formatTopDateTime(); };
     update();
     setInterval(update, 1000);
   }
@@ -177,32 +185,4 @@
     setupFooterLinks();
     setupMobileNav();
   });
-})();
-
-/* Pipelzm live datetime patch */
-(function () {
-  function updateLiveDateTime() {
-    const el = document.getElementById("live-time");
-    if (!el) return;
-
-    const now = new Date();
-
-    const date = new Intl.DateTimeFormat("en-US", {
-      month: "short",
-      day: "2-digit",
-      year: "numeric"
-    }).format(now);
-
-    const time = new Intl.DateTimeFormat("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true
-    }).format(now);
-
-    el.textContent = `Date : ${date} · Time : ${time}`;
-  }
-
-  updateLiveDateTime();
-  setInterval(updateLiveDateTime, 1000);
 })();

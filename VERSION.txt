@@ -1,0 +1,1 @@
+Version final: CV academico + fecha/hora en vivo + cache busting v20260609b
